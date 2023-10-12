@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Box } from "@mui/material";
 import Navbar from "@/src/layout/Navbar";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
+            <Box sx={{backgroundColor: "#5B848D", width: "100%", height: "100vh" ,}}></Box>
         </Box>
     );
 }
