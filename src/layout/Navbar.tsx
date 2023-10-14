@@ -5,7 +5,7 @@ import React from "react";
 
 const Navbar: React.FC = (): JSX.Element => {
     return (
-        <AppBar sx={{ backgroundColor: "#ffffff" }}>
+        <AppBar position="relative" sx={{ backgroundColor: "#ffffff" }}>
             <Box sx={{ width: "fit-content", margin: "5px 5px" }}>
                 <Image src={LogoDark} alt="Logo" />
             </Box>
