@@ -2,8 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Box } from "@mui/material";
 import Navbar from "@/src/layout/Navbar";
-import LoginForm from "@/src/Component/Login/LoginForm";
-
+import LoginForm from "@/src/components/login/LoginForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +15,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Box sx={{backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
+            <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
                 <Navbar />
                 <LoginForm />
             </Box>
