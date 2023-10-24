@@ -1,5 +1,5 @@
 import Piechart from "@/src/components/charts/piechart";
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
