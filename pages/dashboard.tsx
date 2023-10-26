@@ -4,8 +4,12 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import Data from "../data/chart_data.json";
+import MainNavbar from "@/src/layout/MainNavbar";
+import Sidebar from "@/src/layout/Sidebar";
 
 const DashboardPage: NextPage = (): JSX.Element => {
+    const [open, setOpen] = React.useState(true);
+
     const data = {
         datasets: [
             {
@@ -28,6 +32,11 @@ const DashboardPage: NextPage = (): JSX.Element => {
             },
         },
     };
+
+    React.useEffect(() => {
+        console.log(open);
+    }, [open]);
+
     return (
         <Box>
             <Head>
@@ -37,10 +46,9 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
-                {/*
-                    For chart component
-                */}
-                <Piechart title="Percentage of Employees by Gender" data={data} options={options} />
+                <MainNavbar isOpen={(status) => setOpen(status)} />
+                <Sidebar isOpen={open} />
+                {/* <Piechart title="Percentage of Employees by Gender" data={data} options={options} /> */}
             </Box>
         </Box>
     );
