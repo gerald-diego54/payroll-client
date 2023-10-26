@@ -18,7 +18,7 @@ const MainNavbar: React.FC<{ isOpen: (status: boolean) => void }> = ({ isOpen })
             duration: theme.transitions.duration.leavingScreen,
         }),
         ...(open && {
-            width: `calc(100% - 240px)`,
+            width: `calc(100% - 298px)`,
             marginLeft: `240px`,
             transition: theme.transitions.create(["margin", "width"], {
                 easing: theme.transitions.easing.easeOut,
