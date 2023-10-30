@@ -6,6 +6,7 @@ import React from "react";
 import Data from "../data/chart_data.json";
 import MainNavbar from "@/src/layout/MainNavbar";
 import Sidebar from "@/src/layout/Sidebar";
+import Bargraph from "@/src/components/charts/bargraph";
 
 const DashboardPage: NextPage = (): JSX.Element => {
     const [open, setOpen] = React.useState(true);
@@ -13,7 +14,7 @@ const DashboardPage: NextPage = (): JSX.Element => {
     const data = {
         datasets: [
             {
-                label: "Percentage of Employees by Gender",
+                label: "",
                 data: Data[0].data,
                 backgroundColor: ["#EAF6ED", "#67C587"],
                 borderColor: ["#EAF6ED", "#67C587"],
@@ -24,18 +25,36 @@ const DashboardPage: NextPage = (): JSX.Element => {
     };
 
     const options = {
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
+            // for bargraph, to display datalabel on top
+            datalabels: {
+                display: true,
+                anchor: "end",
+                align: "start",
+                offset: -30,
+            },
             legend: {
                 display: true,
                 position: "bottom",
             },
         },
-    };
 
-    React.useEffect(() => {
-        console.log(open);
-    }, [open]);
+        // for bargraph, to remove data label on the side
+        scales: {
+            y: {
+                ticks: {
+                    display: false,
+                    beginAtZero: true,
+                },
+
+                grid: {
+                    drawBorder: false,
+                    display: false,
+                },
+            },
+        },
+    };
 
     return (
         <Box>
@@ -48,7 +67,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
             <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
                 <MainNavbar isOpen={(status) => setOpen(status)} />
                 <Sidebar isOpen={open} />
-                {/* <Piechart title="Percentage of Employees by Gender" data={data} options={options} /> */}
             </Box>
         </Box>
     );
