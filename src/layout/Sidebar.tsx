@@ -50,7 +50,7 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }): JSX.Element => {
         >
             <SidebarContainer>
                 <Image
-                    src="light-logo.svg"
+                    src="/light-logo.svg"
                     width={206}
                     height={100}
                     alt="Picture of the author"
