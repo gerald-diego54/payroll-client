@@ -1,34 +1,22 @@
-import {
-    Box,
-    FilledInput,
-    FormControl,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    Typography,
-    useMediaQuery,
-} from "@mui/material";
+import { Box, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Image from "next/image";
-import { Link, Paper, TextField } from "@mui/material";
+import Link from "@mui/material/Link";
 import LogoDark from "../../../public/logo-dark.svg";
+import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 
 const LoginForm: React.FC = (): JSX.Element => {
-    const theme = useTheme();
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const media = useMediaQuery(theme.breakpoints.down("md"));
-    const mobileStyle = { maxWidth: "90vw", margin: "40px auto 0 auto", padding: "30px 0" };
-    const desktopStyle = { maxWidth: "332px", margin: "40px auto 0 auto", padding: "30px 0" };
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
     return (
-        <Paper elevation={3} sx={media ? mobileStyle : desktopStyle}>
+        <Paper elevation={3} sx={{ maxWidth: "25%", margin: "40px auto 0 auto", padding: "30px 0" }}>
             <Box sx={{ width: "fit-content", margin: "0 auto" }}>
                 <Image src={LogoDark} alt="Logo" />
             </Box>
