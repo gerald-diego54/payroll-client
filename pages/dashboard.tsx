@@ -56,10 +56,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
         },
     };
 
-    React.useEffect(() => {
-        console.log(open);
-    }, [open]);
-
     return (
         <Box>
             <Head>
