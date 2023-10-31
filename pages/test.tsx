@@ -1,10 +1,9 @@
-// import ColorTabs from "@/src/components/form_modals/FormNavbar";
+import CustomTabs from "@/src/components/form_modals/Tabs";
 import { NextPage } from "next";
 import React from "react";
-
 import { Box } from "@mui/material";
-import OvertimeTab from "@/src/components/form_modals/OvertimeTab";
-import DenseTable from "@/src/components/form_modals/OvertimeTab";
+import OvertimeTab from "@/src/components/form_modals/Tables";
+import CustomTable from "@/src/components/form_modals/Tables";
 
 const TestComponent: NextPage = () => {
     return (
@@ -12,7 +11,7 @@ const TestComponent: NextPage = () => {
             <Box>
                 {/* <ColorTabs /> */}
                 {/* <OvertimeTab /> */}
-                <DenseTable />
+                <CustomTable />
             </Box>
         </div>
     );
