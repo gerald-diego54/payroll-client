@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Box } from "@mui/material";
 import Navbar from "@/src/layout/Navbar";
 import LoginForm from "@/src/components/login/LoginForm";
-import UserForm from "@/src/components/forms/UserForm";
+import UserInfo from "@/src/components/user-Info/UserInfo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +18,8 @@ export default function Home() {
       </Head>
       <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
         <Navbar />
-        <LoginForm />
-        <UserForm/>
+        {/* <LoginForm/> */}
+        <UserInfo/>
          
       </Box>
     </Box>
