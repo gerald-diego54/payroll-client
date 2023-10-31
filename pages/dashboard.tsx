@@ -1,4 +1,3 @@
-import Piechart from "@/src/components/charts/piechart";
 import { Box } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -6,7 +5,6 @@ import React from "react";
 import Data from "../data/chart_data.json";
 import MainNavbar from "@/src/layout/MainNavbar";
 import Sidebar from "@/src/layout/Sidebar";
-import Bargraph from "@/src/components/charts/bargraph";
 
 const DashboardPage: NextPage = (): JSX.Element => {
     const [open, setOpen] = React.useState(true);
@@ -14,7 +12,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
     const data = {
         datasets: [
             {
-                label: "",
                 data: Data[0].data,
                 backgroundColor: ["#EAF6ED", "#67C587"],
                 borderColor: ["#EAF6ED", "#67C587"],
