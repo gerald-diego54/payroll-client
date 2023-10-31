@@ -4,10 +4,13 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import Data from "../data/chart_data.json";
-import Bargraph  from "@/src/components/charts/bargraph";
-
+import MainNavbar from "@/src/layout/MainNavbar";
+import Sidebar from "@/src/layout/Sidebar";
+import Bargraph from "@/src/components/charts/bargraph";
 
 const DashboardPage: NextPage = (): JSX.Element => {
+    const [open, setOpen] = React.useState(true);
+
     const data = {
         datasets: [
             {
@@ -29,15 +32,15 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 display: true,
                 anchor: "end",
                 align: "start",
-                offset: -30
+                offset: -30,
             },
             legend: {
                 display: true,
                 position: "bottom",
             },
-         },
-         
-         // for bargraph, to remove data label on the side
+        },
+
+        // for bargraph, to remove data label on the side
         scales: {
             y: {
                 ticks: {
@@ -47,12 +50,11 @@ const DashboardPage: NextPage = (): JSX.Element => {
 
                 grid: {
                     drawBorder: false,
-                    display: false
-                }
+                    display: false,
+                },
             },
         },
     };
-
 
     return (
         <Box>
@@ -63,12 +65,8 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
-                {
-                    <Bargraph title="Percentage of Employees by Statuses" data={data} options={options}  />
-                }
-                {
-                    /*<Piechart title="Percentage of Employees by Gender" data={data} options={options} />*/
-                }
+                <MainNavbar isOpen={(status) => setOpen(status)} />
+                <Sidebar isOpen={open} />
             </Box>
         </Box>
     );
