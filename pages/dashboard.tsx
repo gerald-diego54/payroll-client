@@ -56,10 +56,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
         },
     };
 
-    React.useEffect(() => {
-        console.log(open);
-    }, [open]);
-
     return (
         <Box>
             <Head>
@@ -74,7 +70,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 {/* <Piechart title="Percentage of Employees by Gender" data={data} options={options} /> */}
 
                 {<Bargraph title="Percentage of Employees by Statuses" data={data} options={options} />}
-                {/*<Piechart title="Percentage of Employees by Gender" data={data} options={options} />*/}
             </Box>
         </Box>
     );
