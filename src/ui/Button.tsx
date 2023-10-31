@@ -1,20 +1,9 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const AddButton = ({ onClick }) => {
+const AddButton = () => {
     return (
-        <Button
-            variant="contained"
-            color="warning"
-            // sx={{
-            //     width: "100px",
-            //     margin: "10px",
-            //     backgroundColor: "#fff",
-            //     color: "#044453",
-            //     fontWeight: "bold",
-            // }}
-            onClick={onClick}
-        >
+        <Button variant="contained" color="warning">
             Add
         </Button>
     );
