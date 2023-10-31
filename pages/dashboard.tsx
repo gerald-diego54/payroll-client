@@ -14,7 +14,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
     const data = {
         datasets: [
             {
-                label: "",
                 data: Data[0].data,
                 backgroundColor: ["#EAF6ED", "#67C587"],
                 borderColor: ["#EAF6ED", "#67C587"],
@@ -35,7 +34,7 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 offset: -30,
             },
             legend: {
-                display: true,
+                display: false,
                 position: "bottom",
             },
         },
