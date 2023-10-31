@@ -1,149 +1,146 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-function createData(
-  id: string,
-  name: string,
-  address: string,
-  mobile: string,
-  telephone: string,
-  company: string,
-  branch: string,
-  position: string,
-  payRollGroup: string,
-) {
-  return {
-    id,
-    name,
-    address,
-    mobile,
-    telephone,
-    company,
-    branch,
-    position,
-    payRollGroup,
-  };
-}
-
-const rows = [
-  createData(
-    '01244232',
-    'Walter White',
-    '#69 Angas Street',
-    '0235323134',
-    '123-456-789',
-    'Our Lady of Fatima',
-    'IT Department',
-    'IT Leader',
-    'Example'
-  ),
+const data = [
+  {
+    empId: 124340,
+    avatarSrc: "/Walter_White2.jpg",
+    name: "Walter White",
+    address: "#32 Angas Street",
+    mobile: "042213331",
+    telephone: "123-456-8785",
+    company: "OLFU",
+    branch: "IT Dept",
+    position: "Chemistry Professor",
+    payRollGroup: "Daily",
+  },
 ];
 
-export default function UserTable() {
-  const titleStyle = {
-    color: '#051ad8',
-    fontSize: '22px',
-    backgroundColor: '#dedb7a',
-    width:"100%",
-    fontWeight: 900, // Add this line to set the font weight to 900 (bold)
-  };
-  
-  const subTitle = {
-    fontSize: '20px',
-    fontWeight: 700, // Add this line to set the font weight to 900 (bold)
-  };
- 
+const tableStyles = {
+  backgroundColor: "green", // Background color of the table
+};
 
-  const tableStyles = {
-    margin: 100,
-    width: '80%',
-    border: 'none', // Remove the border
-  };
+const cellStyles = {
+  backgroundColor: "white", // Background color of the cell (h2)
+  color: "gray", // Text color of the cell (h2)
+  borderRadius: "10px", // Border radius for the cells
+  padding: 2,
+  margin: 5,
+};
 
-  const tableCellStyles = {
-    border: 'none', // Remove all borders
-  };
-  
+const containerStyles = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  width: "50%",
+  marginLeft: "25%",
+};
 
+const ThreeColumnTable = () => {
   return (
-    <Table style={tableStyles}>
-      <TableBody style={{ width: 'fit-content' }}>
-        {rows.map((row) => (
-          <TableRow key={row.id}>
-            <TableCell style={{ width: 50, ...tableCellStyles }}>
-              <Avatar
-                alt="User Avatar"
-                src="/Walter_White2.jpg"
-                style={{ width: 400, height: 400 }}
-              />
-            </TableCell>
-            <TableCell style={tableCellStyles}>
-              <Paper
-                elevation={3}
-                style={{
-                  width: '100%',
-                  height: 'fit-content',
-                  padding: '20px',
-                  backgroundColor: 'white',
-                }}
-              >
-                <Typography variant="subtitle1" style={titleStyle}>
-                  EmployeeID
+    <Box sx={containerStyles}>
+      <Table style={tableStyles}>
+        <TableBody>
+          {data.map(item => (
+            <TableRow key={item.empId}>
+              <TableCell>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      backgroundColor: "white",
+                      borderRadius: "45px",
+                      padding:2
+                    }}
+                  >
+                    <Avatar
+                      alt={`Alt pic`}
+                      src={item.avatarSrc}
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                    
+                  </Box>
+                </Box>
+              </TableCell>
+              <TableCell>
+                <Typography variant="h5" style={cellStyles}>
+                  Employee ID:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.id}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Fullname
+                <Typography variant="h5" style={cellStyles}>
+                  Full Name:
                 </Typography>
-                <Typography variant="body1"style={subTitle}> {row.name}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Address
+                <Typography variant="h5" style={cellStyles}>
+                  Address:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.address}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Mobile
+                <Typography variant="h5" style={cellStyles}>
+                  Mobile:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.mobile}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Telephone
+                <Typography variant="h5" style={cellStyles}>
+                  Telephone:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.telephone}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Company
+                <Typography variant="h5" style={cellStyles}>
+                  Company:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.company}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
+                <Typography variant="h5" style={cellStyles}>
                   Branch:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.branch}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Position
+                <Typography variant="h5" style={cellStyles}>
+                  Position:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.position}</Typography>
-
-                <Typography variant="subtitle1" style={titleStyle}>
-                  Payroll-Group
+                <Typography variant="h5" style={cellStyles}>
+                  Payroll Group:
                 </Typography>
-                <Typography variant="body1"style={subTitle}>{row.payRollGroup}</Typography>
-
-              </Paper>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+              </TableCell>
+              <TableCell>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.empId}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.name}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.address}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.mobile}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.telephone}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.company}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.branch}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.position}
+                </Typography>
+                <Typography variant="h5" style={cellStyles}>
+                  {item.payRollGroup}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Box>
   );
-}
+};
 
+export default ThreeColumnTable;
