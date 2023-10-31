@@ -12,6 +12,7 @@ const TestComponent: NextPage = () => {
                 {/* <ColorTabs /> */}
                 {/* <OvertimeTab /> */}
                 <CustomTable />
+                <CustomTabs />
             </Box>
         </div>
     );
