@@ -6,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
 import EditButton from "@/src/ui/Edit";
 import DeleteButton from "@/src/ui/DeleteButton";
 import { DtrData } from "@/data/DTR_data";
@@ -29,16 +28,73 @@ const dataCellStyle = {
 };
 
 const tableContainerStyle = {
-  border: "solid 3px black",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  border: "solid 2px black",
   padding: "1rem", // Adjust the padding as needed
   backgroundColor: "#a6e9b8",
+  width: "80%",
+  margin: "auto auto auto auto",
+  overflow:"auto",
 };
 
-const DTR_Tables = () => {
+const tableHeadCenter = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  padding: "1rem", // Adjust the padding as needed
+  margin: "auto auto auto auto"
+}
+
+const thTitles = {
+  color: "grey",
+  fontSize: 14,
+  fontWeight: 700,
+  borderBottom: "none",
+};
+
+
+
+const DTR_Tables = () => {  
   const rows: any[] = DtrData;
 
   return (
     <TableContainer component={Paper} sx={tableContainerStyle}>
+        <TableHead sx={tableHeadCenter}>
+        <TableRow>
+          <TableCell align="center" style={thTitles}>
+            DTR Logs
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            OT Application
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            Leave Application
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            Change Shift
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            Approver
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            DTR
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            Payroll
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            Other Income Payslip
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            Loan
+          </TableCell>
+          <TableCell align="center" style={thTitles}>
+            13th Monthpay
+          </TableCell>
+        </TableRow>
+      </TableHead>
       <YearDropdown />
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>

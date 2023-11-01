@@ -8,7 +8,8 @@ const DropdownMenu = () => {
     setSelectedOption(event.target.value);
   };
     const dropMenu = {
-      width:"100%",
+      width: "100%",
+      
   }
   return (
     <Box>

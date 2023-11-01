@@ -13,17 +13,17 @@ const YearDropdown = () => {
     (_, index) => new Date().getFullYear() - index
   );
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setSelectedYear(event.target.value);
   };
 
   const yearBox = {
-      width: "25%",
-      padding: 1,
-      marginLeft: 0,
-      display:"inline-flex",
+    width: "25%",
+    padding: 1,
+    marginLeft: 0,
     backgroundColor: "#fff",
-      borderRadius:"10px",
+    borderRadius: "10px",
+    
   };
 
   return (
@@ -38,7 +38,7 @@ const YearDropdown = () => {
             id: "year-select",
           }}
         >
-          {years.map((year) => (
+          {years.map(year => (
             <MenuItem key={year} value={year}>
               {year}
             </MenuItem>
