@@ -9,8 +9,9 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import EditButton from "@/src/ui/Edit";
 import DeleteButton from "@/src/ui/DeleteButton";
-import { DtrData } from "@/data/DTR_data";
+import { DtrData} from "@/data/DTR_data";
 import BasicDatePicker from "@/src/ui/DatePicker";
+import DropdownMenu from "@/src/layout/DtrSelectionMenu";
 
 const cellStyle = {
   fontSize: 18,
@@ -27,7 +28,7 @@ const dataCellStyle = {
 
 const DTR_Tables = () => {
   const rows: any[] = DtrData;
-
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -79,17 +80,17 @@ const DTR_Tables = () => {
               </TableCell>
               <BasicDatePicker />
               <TableCell align="center" style={dataCellStyle}>
-                {row.leaveType}
+              <DropdownMenu/>
               </TableCell>
               <TableCell align="center" style={dataCellStyle}></TableCell>
               <TableCell align="center" style={dataCellStyle}>
-                <Checkbox></Checkbox>
+              
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableBody style={{ border: "solid black 3px" }}>
-          {rows?.map((row: any, index:number) => (
+          {rows?.map((row: any, index: number) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -108,15 +109,19 @@ const DTR_Tables = () => {
               </TableCell>
               <BasicDatePicker />
               <TableCell align="center" style={dataCellStyle}>
-                {row.leaveType}
+              <DropdownMenu/>
               </TableCell>
-              <TableCell align="center" style={dataCellStyle}></TableCell>
+                  <TableCell align="center" style={dataCellStyle}>
+                      
+              </TableCell>
               <TableCell align="center" style={dataCellStyle}>
-                <Checkbox></Checkbox>
+               
               </TableCell>
             </TableRow>
           ))}
-        </TableBody>
+              </TableBody>
+              
+              
       </Table>
     </TableContainer>
   );

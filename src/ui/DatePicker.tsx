@@ -13,7 +13,7 @@ const BasicDatePicker = () => {
     return (
         <Box sx={centerAlign}>
         <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DatePicker label="Date" />
+          <DatePicker label="" />
         </LocalizationProvider>
       </Box>
     );
@@ -22,7 +22,7 @@ const BasicDatePicker = () => {
 export default BasicDatePicker;
 //You can delete the centerAlign, and Box and leave only 
 /*  
-        The First Version is this;
+        The First Version is this
 
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DatePicker label="Date" />
