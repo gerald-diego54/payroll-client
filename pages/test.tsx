@@ -4,6 +4,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import OvertimeTab from "@/src/components/form_modals/Tables";
 import CustomTable from "@/src/components/form_modals/Tables";
+import OvertimeTable from "@/src/components/form_modals/OvertimeTable";
 
 const TestComponent: NextPage = () => {
     return (
@@ -11,8 +12,9 @@ const TestComponent: NextPage = () => {
             <Box>
                 {/* <ColorTabs /> */}
                 {/* <OvertimeTab /> */}
-                <CustomTable />
-                <CustomTabs />
+                {/*<CustomTable /> */}
+                {/*<CustomTabs />*/}
+                <OvertimeTable />
             </Box>
         </div>
     );

@@ -9,10 +9,10 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import EditButton from "@/src/ui/Edit";
 import DeleteButton from "@/src/ui/DeleteButton";
-import { leaveData } from "../../../data/leave_data";
+import { otData } from "../../../data/ot_data";
 
-const CustomTable = () => {
-    const rows: any[] = leaveData;
+const OvertimeTable = () => {
+    const rows: any[] = otData;
 
     return (
         <TableContainer component={Paper}>
@@ -24,10 +24,9 @@ const CustomTable = () => {
                         <TableCell align="center">Number</TableCell>
                         <TableCell align="center">Year</TableCell>
                         <TableCell align="center">Date</TableCell>
-                        <TableCell align="center">Leave Type</TableCell>
-                        <TableCell align="center">Half Day</TableCell>
-                        <TableCell align="center">With Pay</TableCell>
+                        <TableCell align="center">Hours</TableCell>
                         <TableCell align="center">Approved</TableCell>
+                        <TableCell align="center">ConvertedNoLeaveCredit</TableCell>
                         <TableCell align="center">Remarks</TableCell>
                     </TableRow>
                 </TableHead>
@@ -43,10 +42,7 @@ const CustomTable = () => {
                             <TableCell align="center">{row.number}</TableCell>
                             <TableCell align="center">{row.year}</TableCell>
                             <TableCell align="center">{row.date}</TableCell>
-                            <TableCell align="center">{row.leaveType}</TableCell>
-                            <TableCell align="center">
-                                <Checkbox></Checkbox>
-                            </TableCell>
+                            <TableCell align="center">{row.hours}</TableCell>
                             <TableCell align="center">
                                 <Checkbox></Checkbox>
                             </TableCell>
@@ -62,4 +58,4 @@ const CustomTable = () => {
     );
 };
 
-export default CustomTable;
+export default OvertimeTable;
