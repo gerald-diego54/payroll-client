@@ -6,7 +6,6 @@ import TableCell from "@mui/material/TableCell";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
 const data = [
   {
@@ -24,15 +23,18 @@ const data = [
 ];
 
 const tableStyles = {
-  backgroundColor: "green", // Background color of the table
+  backgroundColor: "#93faae", // Background color of the table
+  border: "solid 2px black",
+  maxWidth: 1180,
 };
 
 const cellStyles = {
   backgroundColor: "white", // Background color of the cell (h2)
   color: "gray", // Text color of the cell (h2)
-  borderRadius: "10px", // Border radius for the cells
+  borderRadius: "4px", // Border radius for the cells
   padding: 2,
   margin: 5,
+  border: "solid 2px grey",
 };
 
 const containerStyles = {
@@ -40,16 +42,16 @@ const containerStyles = {
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  width: "50%",
+  width: "60%",
   marginLeft: "25%",
 };
 
-const ThreeColumnTable = () => {
+function ThreeColumnTable ()  {
   return (
     <Box sx={containerStyles}>
       <Table style={tableStyles}>
         <TableBody>
-          {data.map(item => (
+          {data.map((item) => (
             <TableRow key={item.empId}>
               <TableCell>
                 <Box
@@ -63,9 +65,10 @@ const ThreeColumnTable = () => {
                 >
                   <Box
                     sx={{
-                      backgroundColor: "white",
-                      borderRadius: "45px",
-                      padding:2
+                      backgroundColor: "#2bd657",
+                      borderRadius: "10px",
+                      padding: 1,
+                      border: "2px solid #000",
                     }}
                   >
                     <Avatar
@@ -73,11 +76,10 @@ const ThreeColumnTable = () => {
                       src={item.avatarSrc}
                       style={{ width: "300px", height: "300px" }}
                     />
-                    
                   </Box>
                 </Box>
               </TableCell>
-              <TableCell>
+              <TableCell style={{ border: "2px solid #000" }}>
                 <Typography variant="h5" style={cellStyles}>
                   Employee ID:
                 </Typography>
@@ -106,7 +108,7 @@ const ThreeColumnTable = () => {
                   Payroll Group:
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell style={{ border: "2px solid #000" }}>
                 <Typography variant="h5" style={cellStyles}>
                   {item.empId}
                 </Typography>
@@ -142,5 +144,7 @@ const ThreeColumnTable = () => {
     </Box>
   );
 };
+
+
 
 export default ThreeColumnTable;
