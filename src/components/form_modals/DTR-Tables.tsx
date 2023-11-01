@@ -12,6 +12,7 @@ import { DtrData } from "@/data/DTR_data";
 import BasicDatePicker from "@/src/ui/DatePicker";
 import DropdownMenu from "@/src/layout/DtrSelectionMenu";
 import YearDropdown from "@/src/ui/DTR-YearDrop";
+import CurrentTime from "@/src/ui/getCurrentTime";
 
 const cellStyle = {
   fontSize: 18,
@@ -36,7 +37,7 @@ const tableContainerStyle = {
   backgroundColor: "#a6e9b8",
   width: "80%",
   margin: "auto auto auto auto",
-  overflow:"auto",
+  overflow: "auto",
 };
 
 const tableHeadCenter = {
@@ -44,8 +45,8 @@ const tableHeadCenter = {
   flexDirection: "column",
   justifyContent: "center",
   padding: "1rem", // Adjust the padding as needed
-  margin: "auto auto auto auto"
-}
+  margin: "auto auto auto auto",
+};
 
 const thTitles = {
   color: "grey",
@@ -54,14 +55,12 @@ const thTitles = {
   borderBottom: "none",
 };
 
-
-
-const DTR_Tables = () => {  
+const DTR_Tables = () => {
   const rows: any[] = DtrData;
 
   return (
     <TableContainer component={Paper} sx={tableContainerStyle}>
-        <TableHead sx={tableHeadCenter}>
+      <TableHead sx={tableHeadCenter}>
         <TableRow>
           <TableCell align="center" style={thTitles}>
             DTR Logs
@@ -157,8 +156,12 @@ const DTR_Tables = () => {
               <TableCell align="center" style={dataCellStyle}>
                 <DropdownMenu />
               </TableCell>
-              <TableCell align="center" style={dataCellStyle}></TableCell>
-              <TableCell align="center" style={dataCellStyle}></TableCell>
+              <TableCell align="center" style={dataCellStyle}>
+                <CurrentTime />
+              </TableCell>
+              <TableCell align="center" style={dataCellStyle}>
+                <CurrentTime />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -194,8 +197,12 @@ const DTR_Tables = () => {
               <TableCell align="center" style={dataCellStyle}>
                 <DropdownMenu />
               </TableCell>
-              <TableCell align="center" style={dataCellStyle}></TableCell>
-              <TableCell align="center" style={dataCellStyle}></TableCell>
+              <TableCell align="center" style={dataCellStyle}>
+                <CurrentTime />
+              </TableCell>
+              <TableCell align="center" style={dataCellStyle}>
+                <CurrentTime />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
