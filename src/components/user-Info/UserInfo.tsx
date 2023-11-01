@@ -44,14 +44,15 @@ const containerStyles = {
   height: "100vh",
   width: "60%",
   marginLeft: "25%",
+  
 };
 
-function ThreeColumnTable ()  {
+function ThreeColumnTable() {
   return (
     <Box sx={containerStyles}>
       <Table style={tableStyles}>
         <TableBody>
-          {data.map((item) => (
+          {data.map(item => (
             <TableRow key={item.empId}>
               <TableCell>
                 <Box
@@ -107,6 +108,21 @@ function ThreeColumnTable ()  {
                 <Typography variant="h5" style={cellStyles}>
                   Payroll Group:
                 </Typography>
+
+                <Box
+                  sx={{
+                    height: "3rem",
+                    padding: "0.5em",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    backgroundColor: "#ffff",
+                    borderRadius: "0.5rem",
+                    borderRight: "0.4rem solid",
+                  }}
+                >
+                  <Box>ANNOUCEMENT</Box>
+                  <Box>DATE</Box>
+                </Box>
               </TableCell>
               <TableCell style={{ border: "2px solid #000" }}>
                 <Typography variant="h5" style={cellStyles}>
@@ -136,6 +152,22 @@ function ThreeColumnTable ()  {
                 <Typography variant="h5" style={cellStyles}>
                   {item.payRollGroup}
                 </Typography>
+
+                <Box
+                  sx={{
+                    height: "3rem",
+                    padding: "0.5em",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    backgroundColor: "#ffff",
+                    borderRadius: "0.5rem",
+                    borderRight: "0.4rem solid",
+                    
+                  }}
+                >
+                  <Box>LEAVE TYPE</Box>
+                  <Box>LEAVE BALANCE</Box>
+                </Box>
               </TableCell>
             </TableRow>
           ))}
@@ -143,8 +175,6 @@ function ThreeColumnTable ()  {
       </Table>
     </Box>
   );
-};
-
-
+}
 
 export default ThreeColumnTable;
