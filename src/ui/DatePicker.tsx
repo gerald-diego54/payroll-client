@@ -7,8 +7,9 @@ const centerAlign = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    
+};
   
-  };
 const BasicDatePicker = () => {
     return (
         <Box sx={centerAlign}>
