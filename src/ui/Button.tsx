@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Backdrop } from "@mui/material";
 import FormComponent from "../components/form_modals/FormComponent";
 
-const AddButton = ({ variant = "contained" }) => {
+const AddButton = () => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
@@ -12,7 +12,7 @@ const AddButton = ({ variant = "contained" }) => {
         <>
             <Button
                 sx={{ backgroundColor: "#044453", color: "#fff", padding: "0.5rem" }}
-                variant={variant}
+                variant="contained"
                 onClick={handleOpen}
             >
                 Add

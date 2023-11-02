@@ -1,4 +1,3 @@
-import Piechart from "@/src/components/charts/piechart";
 import { Box } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -6,7 +5,6 @@ import React from "react";
 import Data from "../data/chart_data.json";
 import MainNavbar from "@/src/layout/MainNavbar";
 import Sidebar from "@/src/layout/Sidebar";
-import Bargraph from "@/src/components/charts/bargraph";
 
 const DashboardPage: NextPage = (): JSX.Element => {
     const [open, setOpen] = React.useState(true);
@@ -34,7 +32,7 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 offset: -30,
             },
             legend: {
-                display: false,
+                display: true,
                 position: "bottom",
             },
         },
@@ -66,9 +64,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
             <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
                 <MainNavbar isOpen={(status) => setOpen(status)} />
                 <Sidebar isOpen={open} />
-                {/* <Piechart title="Percentage of Employees by Gender" data={data} options={options} /> */}
-
-                {<Bargraph title="Percentage of Employees by Statuses" data={data} options={options} />}
             </Box>
         </Box>
     );

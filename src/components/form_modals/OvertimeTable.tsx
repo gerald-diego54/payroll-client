@@ -9,14 +9,11 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import EditButton from "@/src/ui/Edit";
 import DeleteButton from "@/src/ui/DeleteButton";
+import { otData } from "../../../data/ot_data";
 
-function createData(Number: number, Year: number, Date: number, LeaveType: string, Remarks: string) {
-    return { Number, Year, Date, LeaveType, Remarks };
-}
+const OvertimeTable = () => {
+    const rows: any[] = otData;
 
-const rows = [createData(10, 159, 6.0, "Sick Leave", "Gusto ko lang magkasakit")];
-
-export default function DenseTable() {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -27,40 +24,38 @@ export default function DenseTable() {
                         <TableCell align="center">Number</TableCell>
                         <TableCell align="center">Year</TableCell>
                         <TableCell align="center">Date</TableCell>
-                        <TableCell align="center">Leave Type</TableCell>
-                        <TableCell align="center">Half Day</TableCell>
-                        <TableCell align="center">With Pay</TableCell>
+                        <TableCell align="center">Hours</TableCell>
                         <TableCell align="center">Approved</TableCell>
+                        <TableCell align="center">ConvertedNoLeaveCredit</TableCell>
                         <TableCell align="center">Remarks</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    {rows?.map((row: any, index: number) => (
+                        <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                             <TableCell component="th" scope="row" align="center">
                                 <EditButton />
                             </TableCell>
                             <TableCell align="center">
                                 <DeleteButton />
                             </TableCell>
-                            <TableCell align="center">{row.Number}</TableCell>
-                            <TableCell align="center">{row.Year}</TableCell>
-                            <TableCell align="center">{row.Date}</TableCell>
-                            <TableCell align="center">{row.LeaveType}</TableCell>
+                            <TableCell align="center">{row.number}</TableCell>
+                            <TableCell align="center">{row.year}</TableCell>
+                            <TableCell align="center">{row.date}</TableCell>
+                            <TableCell align="center">{row.hours}</TableCell>
                             <TableCell align="center">
                                 <Checkbox></Checkbox>
                             </TableCell>
                             <TableCell align="center">
                                 <Checkbox></Checkbox>
                             </TableCell>
-                            <TableCell align="center">
-                                <Checkbox></Checkbox>
-                            </TableCell>
-                            <TableCell align="center">{row.Remarks}</TableCell>
+                            <TableCell align="center">{row.remarks}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
     );
-}
+};
+
+export default OvertimeTable;

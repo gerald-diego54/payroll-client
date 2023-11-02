@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 const DeleteButton = () => {
     return (
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="error">
             Delete
         </Button>
     );
