@@ -1,22 +1,37 @@
-import React from "react";
-import Button from "@mui/material/Button";
+import React, { useState } from "react";
+import { Button, Modal, Backdrop } from "@mui/material";
+import FormComponent from "../components/form_modals/FormComponent";
 
-const AddButton = ({ onClick }) => {
+const AddButton = ({ variant = "contained" }) => {
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
-        <Button
-            variant="contained"
-            color="warning"
-            // sx={{
-            //     width: "100px",
-            //     margin: "10px",
-            //     backgroundColor: "#fff",
-            //     color: "#044453",
-            //     fontWeight: "bold",
-            // }}
-            onClick={onClick}
-        >
-            Add
-        </Button>
+        <>
+            <Button
+                sx={{ backgroundColor: "#044453", color: "#fff", padding: "0.5rem" }}
+                variant={variant}
+                onClick={handleOpen}
+            >
+                Add
+            </Button>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                onClose={handleClose}
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+                closeAfterTransition
+            >
+                <FormComponent />
+            </Modal>
+        </>
     );
 };
 

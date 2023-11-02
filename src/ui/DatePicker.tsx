@@ -8,7 +8,7 @@ const BasicDatePicker = () => {
     };
     return (
         <LocalizationProvider sx={dateStyle} dateAdapter={AdapterMoment}>
-            <DatePicker label=" date " />
+            <DatePicker label=" date " sx={{ backgroundColor: "#fff", height: "fit-content" }} />
         </LocalizationProvider>
     );
 };
