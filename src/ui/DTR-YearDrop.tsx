@@ -13,7 +13,7 @@ const YearDropdown = () => {
     (_, index) => new Date().getFullYear() - index
   );
 
-  const handleChange = event => {
+  const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSelectedYear(event.target.value);
   };
 
