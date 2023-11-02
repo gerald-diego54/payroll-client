@@ -3,18 +3,18 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { Box } from '@mui/material';
 
-const centerAlign = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+// const centerAlign = {
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
     
-};
+// };
   
 const BasicDatePicker = () => {
     return (
-        <Box sx={centerAlign}>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DatePicker label="" />
+        <Box>
+       <LocalizationProvider dateAdapter={AdapterMoment}>
+          <DatePicker label="Date" />
         </LocalizationProvider>
       </Box>
     );

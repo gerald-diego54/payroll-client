@@ -24,7 +24,7 @@ const YearDropdown = () => {
     backgroundColor: "#fff",
     borderRadius: "10px",
     
-  };
+  }
 
   return (
     <Box sx={yearBox}>
