@@ -114,7 +114,7 @@ const DTR_Tables = () => {
               Date
             </TableCell>
             <TableCell align="center" style={cellStyle}>
-              Date Type
+              Working Days
             </TableCell>
             <TableCell align="center" style={cellStyle}>
               In
