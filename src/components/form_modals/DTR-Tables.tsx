@@ -37,7 +37,7 @@ const tableContainerStyle = {
   backgroundColor: "#a6e9b8",
   width: "80%",
   margin: "auto auto auto auto",
-  overflow: "auto",
+  overflow: "auto", 
 };
 
 const tableHeadCenter = {
