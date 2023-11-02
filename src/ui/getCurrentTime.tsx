@@ -20,7 +20,7 @@ const CurrentTime = () => {
         <Box>
           <Button
             variant="contained"
-            color="primary"
+            color="success"
             onClick={() => {
               setButtonClicked(false); // Reset the buttonClicked state
             }}
