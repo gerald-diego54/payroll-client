@@ -5,7 +5,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 const BasicDatePicker = () => {
     return (
         <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DatePicker label="date" />
+            <DatePicker slotProps={{ textField: { variant: 'filled' } }} label="date" sx={{ backgroundColor: "#fff"}}/>
         </LocalizationProvider>
     );
 };
