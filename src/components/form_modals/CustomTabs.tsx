@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Tabs as MUITabs, Tab, styled } from "@mui/material";
 import { EnumTabs } from "@/types/tabs.d";
+import { Tabs as MUITabs, Tab, styled } from "@mui/material";
+import * as React from "react";
 
 const CustomTabs: React.FC<{ onTabChange: (tabs: EnumTabs) => void; tabName: EnumTabs }> = ({
     onTabChange,

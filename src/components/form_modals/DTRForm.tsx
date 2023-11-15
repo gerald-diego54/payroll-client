@@ -9,7 +9,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import DatePicker from "@/src/ui/DatePicker";
 
-const FormComponent = () => {
+const DTRForm = () => {
     const [OtNumber, setOtNumber] = React.useState("");
     const [LeaveNumber, setLeaveNumber] = React.useState("");
     const handleChange = (event: SelectChangeEvent) => {
@@ -34,12 +34,12 @@ const FormComponent = () => {
             }}
         >
             <Typography variant="h4" sx={{ marginBottom: "2rem" }}>
-                Overtime Application
+                DTR Application
             </Typography>
             <Divider sx={{ marginBottom: "2rem", borderColor: "#fff" }} />
             <Box sx={{ gap: "2rem", display: "flex" }}>
                 <FormControl variant="filled" sx={{ width: 270, backgroundColor: "#fff", height: "fit-content" }}>
-                    <InputLabel id="demo-simple-select-filled-label">Overtime Application Number</InputLabel>
+                    <InputLabel id="demo-simple-select-filled-label">DTR Application Number</InputLabel>
                     <Select
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
@@ -56,7 +56,7 @@ const FormComponent = () => {
                 </FormControl>
                 <DatePicker />
                 <FormControl variant="filled" sx={{ backgroundColor: "#fff" }}>
-                    <TextField disabled label="Remarks" />
+                    <TextField label="Remarks" />
                 </FormControl>
             </Box>
 
@@ -75,4 +75,4 @@ const FormComponent = () => {
     );
 };
 
-export default FormComponent;
+export default DTRForm;
