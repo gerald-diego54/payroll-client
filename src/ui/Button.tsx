@@ -18,8 +18,6 @@ const AddButton = () => {
                 Add
             </Button>
             <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
                 open={open}
                 onClose={handleClose}
                 sx={{

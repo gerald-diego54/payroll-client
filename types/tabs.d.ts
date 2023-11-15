@@ -1,7 +1,7 @@
-export enum TabName {
-    TAB_ONE = "one",
-    TAB_TWO = "two",
-    TAB_THREE = "three",
-    TAB_FOUR = "four",
-    TAB_FIVE = "five",
+export enum EnumTabs {
+    TAB_ONE = "DTR Logs",
+    TAB_TWO = "OT Application",
+    TAB_THREE = "Leave Application",
+    TAB_FOUR = "Payroll",
+    TAB_FIVE = "DTR",
 }

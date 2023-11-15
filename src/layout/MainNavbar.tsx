@@ -8,7 +8,7 @@ interface AppBarProps extends MUIAppBarProps {
 }
 
 const MainNavbar: React.FC<{ isOpen: (status: boolean) => void }> = ({ isOpen }) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     const AppBar = styled(MUIAppBar, {
         shouldForwardProp: (prop) => prop !== "open",
@@ -18,12 +18,12 @@ const MainNavbar: React.FC<{ isOpen: (status: boolean) => void }> = ({ isOpen })
             duration: theme.transitions.duration.leavingScreen,
         }),
         ...(open && {
-            width: `calc(100% - 298px)`,
-            marginLeft: `240px`,
+            width: !open ? "100%" : "82%",
             transition: theme.transitions.create(["margin", "width"], {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
             }),
+            marginLeft: "18%",
         }),
     }));
 
@@ -32,10 +32,10 @@ const MainNavbar: React.FC<{ isOpen: (status: boolean) => void }> = ({ isOpen })
     }, [open]);
 
     return (
-        <AppBar position="fixed" open={open} sx={{ backgroundColor: "#ffffff" }}>
+        <AppBar position="relative" open={open} sx={{ backgroundColor: "#ffffff", height: "50px" }}>
             <Toolbar>
-                <IconButton onClick={() => setOpen((status) => !status)}>
-                    <MenuIcon />
+                <IconButton onClick={() => setOpen((status) => !status)} size="medium" sx={{ marginTop: "-14px" }}>
+                    <MenuIcon fontSize="inherit" />
                 </IconButton>
             </Toolbar>
         </AppBar>

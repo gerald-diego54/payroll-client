@@ -24,7 +24,7 @@ const FormComponent = () => {
         <Paper
             sx={{
                 padding: "2rem",
-                maxWidth: 1300,
+                width: 800,
                 backgroundColor: "#044453",
                 color: "#fff",
                 alignItems: "center",
@@ -36,7 +36,7 @@ const FormComponent = () => {
             </Typography>
             <Divider sx={{ marginBottom: "2rem", borderColor: "#fff" }} />
             <Box sx={{ gap: "2rem", display: "flex", justifyContent: "space-evenly" }}>
-                <FormControl variant="filled" sx={{ minWidth: 300, backgroundColor: "#fff", height: "fit-content" }}>
+                <FormControl variant="filled" sx={{ backgroundColor: "#fff", height: "fit-content", width: 100 }}>
                     <InputLabel id="demo-simple-select-filled-label">Over Time Application Number</InputLabel>
                     <Select
                         labelId="demo-simple-select-filled-label"
