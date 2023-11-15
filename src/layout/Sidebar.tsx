@@ -1,45 +1,29 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
-import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
-import LogoutIcon from "@mui/icons-material/Logout";
-import RemoveCircleRoundedIcon from "@mui/icons-material/RemoveCircleRounded";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import PaymentsIcon from "@mui/icons-material/Payments";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
-
-const SidebarContainer = styled("div")({
-    display: "flex",
-    flexDirection: "column",
-    paddingRight: "10%",
-    height: "100%",
-    overflow: "hidden",
-});
 
 const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }): JSX.Element => {
     const theme = useTheme();
     const [nestedOpen, setNestedOpen] = React.useState(true);
+    const handleNestedClick = () => setNestedOpen(!nestedOpen);
 
-    const handleNestedClick = () => {
-        setNestedOpen(!nestedOpen);
-    };
+    const SidebarContainer = styled("div")({
+        display: "flex",
+        flexDirection: "column",
+        paddingRight: "10%",
+        height: "100%",
+        overflow: "hidden",
+    });
 
     return (
         <Drawer
             sx={{
-                width: "298px",
                 flexShrink: 0,
                 "& .MuiDrawer-paper": {
-                    width: "298px",
+                    width: "18%",
                     boxSizing: "border-box",
                     backgroundColor: "#044453",
                 },
@@ -57,7 +41,7 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }): JSX.Element => {
                     style={{ marginTop: "15%", marginBottom: "20%", marginLeft: "15%" }}
                 />
                 <List
-                    sx={{ width: "100%", maxWidth: 289, bgcolor: "#044453", marginLeft: "10%" }}
+                    sx={{ width: "100%", maxWidth: 289, backgroundColor: "#044453", marginLeft: "10%" }}
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                 >
@@ -67,46 +51,11 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }): JSX.Element => {
                         </ListItemIcon>
                         <ListItemText sx={{ color: "white" }} primary="Dashboard" />
                     </ListItemButton>
-                    <ListItemButton onClick={handleNestedClick}>
-                        <ListItemIcon>
-                            <PhonelinkSetupIcon sx={{ color: "white" }} />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "white" }} primary="Setup" />
-                        {nestedOpen ? <ExpandLess sx={{ color: "white" }} /> : <ExpandMore sx={{ color: "white" }} />}
-                    </ListItemButton>
-                    <Collapse in={nestedOpen} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                            <ListItemButton sx={{ pl: 7 }}>
-                                <ListItemIcon>
-                                    <PeopleOutlineRoundedIcon sx={{ color: "white" }} />
-                                </ListItemIcon>
-                                <ListItemText sx={{ color: "white" }} primary="Employee" />
-                            </ListItemButton>
-                            <ListItemButton sx={{ pl: 7 }}>
-                                <ListItemIcon>
-                                    <RemoveCircleRoundedIcon sx={{ color: "white" }} />
-                                </ListItemIcon>
-                                <ListItemText sx={{ color: "white" }} primary="Deductions" />
-                            </ListItemButton>
-                        </List>
-                    </Collapse>
                     <ListItemButton>
                         <ListItemIcon>
-                            <PaymentsIcon sx={{ color: "white" }} />
+                            <AccountCircleIcon sx={{ color: "white" }} />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "white" }} primary="Payroll" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AccessTimeIcon sx={{ color: "white" }} />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "white" }} primary="DTR" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <LogoutIcon sx={{ color: "white" }} />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "white" }} primary="logout" />
+                        <ListItemText sx={{ color: "white" }} primary="Employee" />
                     </ListItemButton>
                 </List>
             </SidebarContainer>

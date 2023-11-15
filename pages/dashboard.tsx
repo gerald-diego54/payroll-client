@@ -1,13 +1,68 @@
-import { Box } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import Data from "../data/chart_data.json";
 import MainNavbar from "@/src/layout/MainNavbar";
 import Sidebar from "@/src/layout/Sidebar";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CustomTabs from "@/src/components/form_modals/CustomTabs";
+import CustomTable from "@/src/components/form_modals/Tables";
+import { EnumTabs } from "@/types/tabs.d";
+import {
+    Box,
+    Button,
+    Checkbox,
+    createTheme,
+    Divider,
+    FormControl,
+    FormControlLabel,
+    InputLabel,
+    MenuItem,
+    Modal,
+    Select,
+    SelectChangeEvent,
+    Stack,
+    TextField,
+    ThemeProvider,
+    Typography,
+    styled,
+    Paper,
+    CssBaseline,
+    TableRow,
+    TableCell,
+} from "@mui/material";
+import DatePicker from "@/src/ui/DatePicker";
+import Employee from "@/src/components/dashboard/Employee";
+import moment from "moment";
 
 const DashboardPage: NextPage = (): JSX.Element => {
     const [open, setOpen] = React.useState(true);
+    const [tabName, setTabName] = React.useState<EnumTabs>(EnumTabs.TAB_ONE);
+    const [openModal, setOpenModal] = React.useState(false);
+    const [OtNumber, setOtNumber] = React.useState("");
+    const handleChange = (event: SelectChangeEvent) => {
+        setOtNumber(event.target.value);
+    };
+
+    const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
+        open?: boolean;
+    }>(({ theme, open }) => ({
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create(["margin", "width"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        ...(open && {
+            width: !open ? "100%" : "82%",
+            marginLeft: "18%",
+            position: "relative",
+            transition: theme.transitions.create(["margin", "width"], {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+        }),
+    }));
 
     const data = {
         datasets: [
@@ -24,7 +79,6 @@ const DashboardPage: NextPage = (): JSX.Element => {
     const options = {
         maintainAspectRatio: false,
         plugins: {
-            // for bargraph, to display datalabel on top
             datalabels: {
                 display: true,
                 anchor: "end",
@@ -53,6 +107,27 @@ const DashboardPage: NextPage = (): JSX.Element => {
         },
     };
 
+    const test_data_tab_one: any[] = [
+        {
+            number: 87362813,
+            year: moment().format("YYYY"),
+            date: "REGULAR WORKS",
+            in: moment().format("LT"),
+            out: moment().format("LT"),
+        },
+    ];
+
+    const test_data_tab_two: any[] = [
+        {
+            number: 87362813,
+            year: moment().format("YYYY"),
+            date: moment().format("L"),
+            hours: 3,
+            approved: false,
+            remarks: "-",
+        },
+    ];
+
     return (
         <Box>
             <Head>
@@ -62,8 +137,257 @@ const DashboardPage: NextPage = (): JSX.Element => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
+                <CssBaseline />
+                <Modal
+                    sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
+                    open={openModal}
+                    onClose={() => null}
+                >
+                    <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
+                        <Box>
+                            <Typography variant="h5" mt={3} mb={1} sx={{ color: "#ffffff" }}>
+                                Overtime Application
+                            </Typography>
+                            <Divider sx={{ marginBottom: "2rem", borderColor: "#fff" }} />
+                            <Box
+                                sx={{
+                                    gap: "2rem",
+                                    display: "flex",
+                                    justifyContent: "space-evenly",
+                                }}
+                            >
+                                <FormControl
+                                    variant="filled"
+                                    sx={{
+                                        minWidth: 300,
+                                        backgroundColor: "#fff",
+                                        height: "fit-content",
+                                    }}
+                                >
+                                    <InputLabel id="demo-simple-select-filled-label">
+                                        Over Time Application Number
+                                    </InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-filled-label"
+                                        id="demo-simple-select-filled"
+                                        value={OtNumber}
+                                        onChange={handleChange}
+                                    >
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value={1000312}>1000312</MenuItem>
+                                        <MenuItem value={124124}>124124</MenuItem>
+                                        <MenuItem value={125125}>125125</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <DatePicker />
+                                <TextField
+                                    sx={{
+                                        backgroundColor: "#ffffff",
+                                        border: "none",
+                                        height: "fit-content",
+                                    }}
+                                    label="OT Hours"
+                                    size="medium"
+                                    type="number"
+                                    variant="filled"
+                                />
+                                <ThemeProvider
+                                    theme={createTheme({
+                                        components: {
+                                            MuiTypography: {
+                                                styleOverrides: {
+                                                    root: {
+                                                        fontSize: "0.9rem",
+                                                        color: "#ffffff",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    })}
+                                >
+                                    <Box
+                                        sx={{
+                                            margin: "-13px auto auto auto",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: "fit-content",
+                                        }}
+                                    >
+                                        <FormControlLabel
+                                            control={<Checkbox size="small" sx={{ color: "#fff" }} />}
+                                            label="Approved"
+                                        />
+                                        <FormControlLabel
+                                            sx={{ fontSize: "0.8rem" }}
+                                            control={<Checkbox size="small" sx={{ color: "#fff" }} />}
+                                            label="Convert To Offset Credits"
+                                        />
+                                    </Box>
+                                </ThemeProvider>
+                            </Box>
+                            <Box
+                                sx={{
+                                    gap: "2rem",
+                                    display: "flex",
+                                    justifyContent: "space-evenly",
+                                }}
+                            >
+                                <TextField
+                                    sx={{
+                                        backgroundColor: "#ffffff",
+                                        border: "none",
+                                        height: "fit-content",
+                                    }}
+                                    label="Remarks"
+                                    size="medium"
+                                    disabled
+                                    type="text"
+                                    variant="filled"
+                                    value="Cut-Off August 1 -15 2023"
+                                    fullWidth
+                                />
+                            </Box>
+                        </Box>
+                        <TextField
+                            label="Remarks"
+                            multiline
+                            rows={4}
+                            variant="filled"
+                            sx={{ backgroundColor: "#ffffff", marginTop: 1.6 }}
+                            fullWidth
+                        />
+                        <Divider sx={{ marginTop: "15px", borderColor: "#fff" }} />
+                        <Stack direction="row-reverse" gap={2} my={2}>
+                            <Button onClick={() => setOpenModal((open) => !open)} color="error" variant="contained">
+                                Close
+                            </Button>
+                            <Button color="success" variant="contained">
+                                Save
+                            </Button>
+                        </Stack>
+                    </Box>
+                </Modal>
                 <MainNavbar isOpen={(status) => setOpen(status)} />
                 <Sidebar isOpen={open} />
+                <Paper
+                    sx={{
+                        backgroundColor: "#044453",
+                        width: open ? "82%" : "100%",
+                        marginLeft: open ? "18%" : null,
+                        padding: "7px 10px",
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: 1,
+                        paddingLeft: 2.9,
+                    }}
+                    square
+                >
+                    <DashboardIcon sx={{ color: "white", margin: "auto 0", fontSize: 35 }} />
+                    <Typography color="white" variant="h6" my="auto">
+                        Dashboard
+                    </Typography>
+                </Paper>
+                <Main open={open}>
+                    <Paper
+                        elevation={3}
+                        sx={{
+                            backgroundColor: "#044453",
+                            padding: "15px 0 15px 15px",
+                            width: "100%",
+                            marginBottom: 2.5,
+                        }}
+                    >
+                        <Employee />
+                    </Paper>
+                    <Paper
+                        elevation={3}
+                        sx={{ backgroundColor: "#044453", padding: "10px 18px 10px 15px", width: "100%" }}
+                    >
+                        <CustomTabs onTabChange={(tab) => setTabName(tab)} tabName={tabName} />
+                        <Divider sx={{ borderColor: "#ffffff" }} />
+                        {tabName === EnumTabs.TAB_ONE && (
+                            <Box>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={() => setOpenModal((open) => !open)}
+                                    sx={{ float: "right", margin: "10px 0" }}
+                                >
+                                    Add
+                                </Button>
+                                <CustomTable label={["Edit", "Delete", "Number", "Year", "Date", "In", "Out"]}>
+                                    {test_data_tab_one.map((value, index) => (
+                                        <TableRow
+                                            key={index}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center">
+                                                <Button variant="contained" color="success" size="small">
+                                                    Edit
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Button variant="contained" color="error" size="small">
+                                                    Delete
+                                                </Button>
+                                            </TableCell>
+
+                                            <TableCell align="center">{value.number}</TableCell>
+                                            <TableCell align="center">{value.year}</TableCell>
+                                            <TableCell align="center">{value.date}</TableCell>
+                                            <TableCell align="center">{value.in}</TableCell>
+                                            <TableCell align="center">{value.out}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </CustomTable>
+                            </Box>
+                        )}
+                        {tabName === EnumTabs.TAB_TWO && (
+                            <Box>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={() => setOpenModal((open) => !open)}
+                                    sx={{ float: "right", margin: "10px 0" }}
+                                >
+                                    Add
+                                </Button>
+                                <CustomTable
+                                    label={["Edit", "Delete", "Number", "Year", "Date", "Hours", "Approved", "Remarks"]}
+                                >
+                                    {test_data_tab_two.map((value, index) => (
+                                        <TableRow
+                                            key={index}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center">
+                                                <Button variant="contained" color="success" size="small">
+                                                    Edit
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Button variant="contained" color="error" size="small">
+                                                    Delete
+                                                </Button>
+                                            </TableCell>
+
+                                            <TableCell align="center">{value.number}</TableCell>
+                                            <TableCell align="center">{value.year}</TableCell>
+                                            <TableCell align="center">{value.date}</TableCell>
+                                            <TableCell align="center">{value.hours}</TableCell>
+                                            <TableCell align="center">
+                                                <Checkbox />
+                                            </TableCell>
+                                            <TableCell align="center">{value.remarks}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </CustomTable>
+                            </Box>
+                        )}
+                    </Paper>
+                </Main>
             </Box>
         </Box>
     );
