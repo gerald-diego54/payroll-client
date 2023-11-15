@@ -62,13 +62,6 @@ const LoginForm: React.FC = (): JSX.Element => {
                     LOGIN
                 </Button>
             </Box>
-            <Typography align="center" sx={{ color: "#044453", fontFamily: "Source Sans 3", paddingTop: 2 }}>
-                Don't have an account?{" "}
-                <Link href="" underline="always">
-                    {"Sign up "}
-                </Link>
-                Here
-            </Typography>
         </Paper>
     );
 };
