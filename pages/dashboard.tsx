@@ -1,38 +1,31 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import React from "react";
-import Data from "../data/chart_data.json";
-import MainNavbar from "@/src/layout/MainNavbar";
-import Sidebar from "@/src/layout/Sidebar";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import CustomTabs from "@/src/components/form_modals/CustomTabs";
-import CustomTable from "@/src/components/form_modals/Tables";
 import { EnumTabs } from "@/types/tabs.d";
+import { NextPage } from "next";
+import CustomTable from "@/src/components/form_modals/Tables";
+import CustomTabs from "@/src/components/form_modals/CustomTabs";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import Head from "next/head";
+import MainNavbar from "@/src/layout/MainNavbar";
+import React from "react";
+import Sidebar from "@/src/layout/Sidebar";
 import {
     Box,
     Button,
     Checkbox,
-    createTheme,
+    CssBaseline,
     Divider,
-    FormControl,
-    FormControlLabel,
-    InputLabel,
-    MenuItem,
     Modal,
-    Select,
+    Paper,
     SelectChangeEvent,
     Stack,
-    TextField,
-    ThemeProvider,
-    Typography,
     styled,
-    Paper,
-    CssBaseline,
-    TableRow,
     TableCell,
+    TableRow,
+    Typography,
 } from "@mui/material";
-import DatePicker from "@/src/ui/DatePicker";
+import DTRForm from "@/src/components/form_modals/DTRForm";
 import Employee from "@/src/components/dashboard/Employee";
+import FormComponent from "@/src/components/form_modals/FormComponent";
+import LeaveForm from "@/src/components/form_modals/LeaveForm";
 import moment from "moment";
 
 const DashboardPage: NextPage = (): JSX.Element => {
@@ -64,48 +57,47 @@ const DashboardPage: NextPage = (): JSX.Element => {
         }),
     }));
 
-    const data = {
-        datasets: [
-            {
-                data: Data[0].data,
-                backgroundColor: ["#EAF6ED", "#67C587"],
-                borderColor: ["#EAF6ED", "#67C587"],
-                borderWidth: 1,
-            },
-        ],
-        labels: Data[0].labels,
-    };
+    // const data = {
+    //     datasets: [
+    //         {
+    //             data: Data[0].data,
+    //             backgroundColor: ["#EAF6ED", "#67C587"],
+    //             borderColor: ["#EAF6ED", "#67C587"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    //     labels: Data[0].labels,
+    // };
 
-    const options = {
-        maintainAspectRatio: false,
-        plugins: {
-            datalabels: {
-                display: true,
-                anchor: "end",
-                align: "start",
-                offset: -30,
-            },
-            legend: {
-                display: true,
-                position: "bottom",
-            },
-        },
+    // const options = {
+    //     maintainAspectRatio: false,
+    //     plugins: {
+    //         datalabels: {
+    //             display: true,
+    //             anchor: "end",
+    //             align: "start",
+    //             offset: -30,
+    //         },
+    //         legend: {
+    //             display: true,
+    //             position: "bottom",
+    //         },
+    //     },
 
-        // for bargraph, to remove data label on the side
-        scales: {
-            y: {
-                ticks: {
-                    display: false,
-                    beginAtZero: true,
-                },
+    //     scales: {
+    //         y: {
+    //             ticks: {
+    //                 display: false,
+    //                 beginAtZero: true,
+    //             },
 
-                grid: {
-                    drawBorder: false,
-                    display: false,
-                },
-            },
-        },
-    };
+    //             grid: {
+    //                 drawBorder: false,
+    //                 display: false,
+    //             },
+    //         },
+    //     },
+    // };
 
     const test_data_tab_one: any[] = [
         {
@@ -138,137 +130,81 @@ const DashboardPage: NextPage = (): JSX.Element => {
             </Head>
             <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
                 <CssBaseline />
-                <Modal
-                    sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
-                    open={openModal}
-                    onClose={() => null}
-                >
-                    <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
-                        <Box>
-                            <Typography variant="h5" mt={3} mb={1} sx={{ color: "#ffffff" }}>
-                                Overtime Application
-                            </Typography>
-                            <Divider sx={{ marginBottom: "2rem", borderColor: "#fff" }} />
-                            <Box
-                                sx={{
-                                    gap: "2rem",
-                                    display: "flex",
-                                    justifyContent: "space-evenly",
-                                }}
-                            >
-                                <FormControl
-                                    variant="filled"
-                                    sx={{
-                                        minWidth: 300,
-                                        backgroundColor: "#fff",
-                                        height: "fit-content",
-                                    }}
-                                >
-                                    <InputLabel id="demo-simple-select-filled-label">
-                                        Over Time Application Number
-                                    </InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-filled-label"
-                                        id="demo-simple-select-filled"
-                                        value={OtNumber}
-                                        onChange={handleChange}
+                {EnumTabs.TAB_ONE === tabName && (
+                    <Modal
+                        sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
+                        open={openModal}
+                        onClose={() => null}
+                    >
+                        <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
+                            <DTRForm />
+                            <Paper elevation={0} sx={{ padding: "0 1rem", backgroundColor: "transparent" }}>
+                                <Stack direction="row-reverse" gap={2} my={2}>
+                                    <Button
+                                        onClick={() => setOpenModal((open) => !open)}
+                                        color="error"
+                                        variant="contained"
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={1000312}>1000312</MenuItem>
-                                        <MenuItem value={124124}>124124</MenuItem>
-                                        <MenuItem value={125125}>125125</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <DatePicker />
-                                <TextField
-                                    sx={{
-                                        backgroundColor: "#ffffff",
-                                        border: "none",
-                                        height: "fit-content",
-                                    }}
-                                    label="OT Hours"
-                                    size="medium"
-                                    type="number"
-                                    variant="filled"
-                                />
-                                <ThemeProvider
-                                    theme={createTheme({
-                                        components: {
-                                            MuiTypography: {
-                                                styleOverrides: {
-                                                    root: {
-                                                        fontSize: "0.9rem",
-                                                        color: "#ffffff",
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    })}
-                                >
-                                    <Box
-                                        sx={{
-                                            margin: "-13px auto auto auto",
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            height: "fit-content",
-                                        }}
-                                    >
-                                        <FormControlLabel
-                                            control={<Checkbox size="small" sx={{ color: "#fff" }} />}
-                                            label="Approved"
-                                        />
-                                        <FormControlLabel
-                                            sx={{ fontSize: "0.8rem" }}
-                                            control={<Checkbox size="small" sx={{ color: "#fff" }} />}
-                                            label="Convert To Offset Credits"
-                                        />
-                                    </Box>
-                                </ThemeProvider>
-                            </Box>
-                            <Box
-                                sx={{
-                                    gap: "2rem",
-                                    display: "flex",
-                                    justifyContent: "space-evenly",
-                                }}
-                            >
-                                <TextField
-                                    sx={{
-                                        backgroundColor: "#ffffff",
-                                        border: "none",
-                                        height: "fit-content",
-                                    }}
-                                    label="Remarks"
-                                    size="medium"
-                                    disabled
-                                    type="text"
-                                    variant="filled"
-                                    value="Cut-Off August 1 -15 2023"
-                                    fullWidth
-                                />
-                            </Box>
+                                        Close
+                                    </Button>
+                                    <Button color="success" variant="contained">
+                                        Save
+                                    </Button>
+                                </Stack>
+                            </Paper>
                         </Box>
-                        <TextField
-                            label="Remarks"
-                            multiline
-                            rows={4}
-                            variant="filled"
-                            sx={{ backgroundColor: "#ffffff", marginTop: 1.6 }}
-                            fullWidth
-                        />
-                        <Divider sx={{ marginTop: "15px", borderColor: "#fff" }} />
-                        <Stack direction="row-reverse" gap={2} my={2}>
-                            <Button onClick={() => setOpenModal((open) => !open)} color="error" variant="contained">
-                                Close
-                            </Button>
-                            <Button color="success" variant="contained">
-                                Save
-                            </Button>
-                        </Stack>
-                    </Box>
-                </Modal>
+                    </Modal>
+                )}
+                {EnumTabs.TAB_TWO === tabName && (
+                    <Modal
+                        sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
+                        open={openModal}
+                        onClose={() => null}
+                    >
+                        <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
+                            <FormComponent />
+                            <Paper elevation={0} sx={{ padding: "0 1rem", backgroundColor: "transparent" }}>
+                                <Stack direction="row-reverse" gap={2} my={2}>
+                                    <Button
+                                        onClick={() => setOpenModal((open) => !open)}
+                                        color="error"
+                                        variant="contained"
+                                    >
+                                        Close
+                                    </Button>
+                                    <Button color="success" variant="contained">
+                                        Save
+                                    </Button>
+                                </Stack>
+                            </Paper>
+                        </Box>
+                    </Modal>
+                )}
+                {EnumTabs.TAB_THREE === tabName && (
+                    <Modal
+                        sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
+                        open={openModal}
+                        onClose={() => null}
+                    >
+                        <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
+                            <LeaveForm />
+                            <Paper elevation={0} sx={{ padding: "0 1rem", backgroundColor: "transparent" }}>
+                                <Stack direction="row-reverse" gap={2} my={2}>
+                                    <Button
+                                        onClick={() => setOpenModal((open) => !open)}
+                                        color="error"
+                                        variant="contained"
+                                    >
+                                        Close
+                                    </Button>
+                                    <Button color="success" variant="contained">
+                                        Save
+                                    </Button>
+                                </Stack>
+                            </Paper>
+                        </Box>
+                    </Modal>
+                )}
                 <MainNavbar isOpen={(status) => setOpen(status)} />
                 <Sidebar isOpen={open} />
                 <Paper
