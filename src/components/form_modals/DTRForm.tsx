@@ -55,14 +55,14 @@ const DTRForm = () => {
                     </Select>
                 </FormControl>
                 <DatePicker />
-                <FormControl variant="filled" sx={{ backgroundColor: "#fff" }}>
-                    <TextField label="Remarks" />
+                <FormControl sx={{ backgroundColor: "#fff" }}>
+                    <TextField variant="filled" label="Remarks" />
                 </FormControl>
             </Box>
 
             <Box sx={{ display: "flex", marginTop: "1rem" }}>
-                <FormControl variant="filled" sx={{ minWidth: "100%", backgroundColor: "#fff" }}>
-                    <TextField disabled label="Remarks" />
+                <FormControl sx={{ minWidth: "100%", backgroundColor: "#fff" }}>
+                    <TextField variant="filled" disabled label="Remarks" />
                 </FormControl>
             </Box>
             <Box sx={{ display: "flex", marginTop: "1rem", marginBottom: "1rem" }}>
