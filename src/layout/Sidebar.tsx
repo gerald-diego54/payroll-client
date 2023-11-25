@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material";
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse, Link } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
@@ -45,18 +45,22 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }): JSX.Element => {
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                 >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <DashboardIcon sx={{ color: "white" }} />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "white" }} primary="Dashboard" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AccountCircleIcon sx={{ color: "white" }} />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "white" }} primary="Employee" />
-                    </ListItemButton>
+                    <Link underline="none" href="/dashboard">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <DashboardIcon sx={{ color: "white" }} />
+                            </ListItemIcon>
+                            <ListItemText sx={{ color: "white" }} primary="Dashboard" />
+                        </ListItemButton>
+                    </Link>
+                    <Link underline="none" href="/employee">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AccountCircleIcon sx={{ color: "white" }} />
+                            </ListItemIcon>
+                            <ListItemText sx={{ color: "white" }} primary="Employee" />
+                        </ListItemButton>
+                    </Link>
                 </List>
             </SidebarContainer>
         </Drawer>
