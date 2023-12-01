@@ -6,6 +6,10 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import Employee from "@/src/components/dashboard/Employee";
+import Bargraph from "@/src/components/charts/bargraph";
+import Data from "../data/chart_data.json";
+import Piechart from "@/src/components/charts/piechart";
+import { relative } from "path";
 
 const DashboardPage: NextPage = () => {
     const [open, setOpen] = React.useState(true);
@@ -34,6 +38,46 @@ const DashboardPage: NextPage = () => {
         }),
     }));
 
+    const data = {
+        datasets: [
+            {
+                data: Data[0].data,
+                backgroundColor: ["#EAF6ED", "#67C587"],
+                borderColor: ["#EAF6ED", "#67C587"],
+            },
+        ],
+        labels: Data[0].labels,
+    };
+
+    const options = {
+        maintainAspectRatio: false,
+        plugins: {
+            datalabels: {
+                display: true,
+                anchor: "end",
+                align: "start",
+                offset: -30,
+            },
+            legend: {
+                display: false,
+                position: "bottom",
+            },
+        },
+        scales: {
+            y: {
+                ticks: {
+                    display: false,
+                    beginAtZero: true,
+                },
+
+                grid: {
+                    drawBorder: false,
+                    display: false,
+                },
+            },
+        },
+    };
+
     return (
         <Box>
             <Head>
@@ -42,28 +86,60 @@ const DashboardPage: NextPage = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Box sx={{ backgroundColor: "#5B848D", width: "100%", height: "100vh" }}>
+            <Box
+                sx={{
+                    backgroundColor: "#5B848D",
+                    width: "100%",
+                    height: "100vh",
+                    display: "flex",
+                    flexDirection: "row",
+                }}
+            >
                 <CssBaseline />
-                <MainNavbar isOpen={(status) => setOpen(status)} />
                 <Sidebar isOpen={open} />
-                <Paper
-                    sx={{
-                        backgroundColor: "#044453",
-                        width: open ? "82%" : "100%",
-                        marginLeft: open ? "18%" : null,
-                        padding: "7px 10px",
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: 1,
-                        paddingLeft: 2.9,
-                    }}
-                    square
-                >
-                    <DashboardIcon sx={{ color: "white", margin: "auto 0", fontSize: 35 }} />
-                    <Typography color="white" variant="h6" my="auto">
-                        Dashboard
-                    </Typography>
-                </Paper>
+                <Box sx={{ width: "100%" }}>
+                    <Paper
+                        sx={{
+                            backgroundColor: "#ffffff",
+                            width: "100%",
+                            padding: "7px 10px",
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 1,
+                            paddingLeft: 2.9,
+                            border: "none",
+                        }}
+                        square
+                        elevation={4}
+                    >
+                        <DashboardIcon sx={{ color: "#044453", margin: "auto 0", fontSize: 35 }} />
+                        <Typography color="#044453" variant="h6" fontWeight={600} my="auto">
+                            Dashboard
+                        </Typography>
+                    </Paper>
+                    <Paper
+                        elevation={0}
+                        sx={{
+                            backgroundColor: "transparent",
+                            width: "100%",
+                            marginBottom: 2.5,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                margin: "20px auto",
+                                width: "fit-content",
+                                display: "grid",
+                                gridTemplateColumns: "auto auto auto",
+                                gap: 3,
+                            }}
+                        >
+                            <Bargraph title={"Test Graph"} data={data} options={options} />
+                            <Piechart title={"Test Graph"} data={data} options={options} />
+                            <Bargraph title={"Test Graph"} data={data} options={options} />
+                        </Box>
+                    </Paper>
+                </Box>
             </Box>
         </Box>
     );

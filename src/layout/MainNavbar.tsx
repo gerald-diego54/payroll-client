@@ -33,11 +33,11 @@ const MainNavbar: React.FC<{ isOpen: (status: boolean) => void }> = ({ isOpen })
 
     return (
         <AppBar position="relative" open={open} sx={{ backgroundColor: "#ffffff", height: "50px" }}>
-            <Toolbar>
+            {/* <Toolbar>
                 <IconButton onClick={() => setOpen((status) => !status)} size="medium" sx={{ marginTop: "-14px" }}>
                     <MenuIcon fontSize="inherit" />
                 </IconButton>
-            </Toolbar>
+            </Toolbar> */}
         </AppBar>
     );
 };
