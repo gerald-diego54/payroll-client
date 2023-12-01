@@ -17,9 +17,9 @@ import React, { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse } from "axios";
-import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/src/schema/LoginSchema";
+import { useRouter } from "next/router";
 
 const LoginForm: React.FC = (): JSX.Element => {
     const axiosInstance = axios.create({
@@ -28,6 +28,7 @@ const LoginForm: React.FC = (): JSX.Element => {
             "Content-Type": "application/json",
         },
     });
+    const route = useRouter();
     const theme = useTheme();
     const [showPassword, setShowPassword] = useState(false);
     const [apiData, setApiData] = useState<AxiosResponse<any, any>>();
@@ -48,8 +49,10 @@ const LoginForm: React.FC = (): JSX.Element => {
         if (res.status === 200) {
             console.log(res);
             localStorage.setItem("email", res.data.data.email);
-            localStorage.setItem("user_id", res.data.data.id);
+            localStorage.setItem("user_id", res.data.data.user_id);
             localStorage.setItem("token", res.data.token);
+
+            route.push("/dashboard");
         }
     };
 
