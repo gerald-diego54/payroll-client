@@ -11,6 +11,7 @@ import React from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useForm } from "react-hook-form";
 
 const LeaveForm = () => {
     const [LeaveNumber, setLeaveNumber] = React.useState("");
@@ -22,6 +23,12 @@ const LeaveForm = () => {
     const leaveChange = (event: SelectChangeEvent) => {
         setLeaveType(event.target.value);
     };
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
     return (
         <Paper
@@ -56,7 +63,7 @@ const LeaveForm = () => {
                         <MenuItem value={100002}>100002</MenuItem>
                     </Select>
                 </FormControl>
-                <DatePicker />
+                <DatePicker register={register} name={"date"} />
             </Box>
 
             <Box sx={{ display: "flex", marginTop: "1rem" }}>
