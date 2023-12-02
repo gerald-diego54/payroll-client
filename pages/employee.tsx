@@ -38,8 +38,8 @@ const EmployeePage: NextPage = (): JSX.Element => {
             number: 87362813,
             year: moment().format("YYYY"),
             date: "REGULAR WORKS",
-            in: moment().format("LT"),
-            out: moment().format("LT"),
+            in: "12:00 PM",
+            out: "12:00 PM",
         },
     ];
 
