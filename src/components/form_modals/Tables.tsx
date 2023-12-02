@@ -13,15 +13,13 @@ interface CustomTableProps {
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({ label, children }) => {
-    const rows: any[] = leaveData;
-
     return (
         <TableContainer sx={{ margin: "10px 0", backgroundColor: "#ffffff" }}>
-            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <Table size="small">
                 <TableHead sx={{ backgroundColor: "#5B848D" }}>
                     <TableRow>
                         {label.map((value, index) => (
-                            <TableCell key={index} align="center" sx={{ color: "#ffffff" }}>
+                            <TableCell key={index} sx={{ color: "#ffffff" }}>
                                 {value}
                             </TableCell>
                         ))}

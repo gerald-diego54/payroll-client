@@ -1,15 +1,16 @@
-import MainNavbar from "@/src/layout/MainNavbar";
-import Sidebar from "@/src/layout/Sidebar";
-import { Box, CssBaseline, Paper, SelectChangeEvent, styled, Typography } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import { Box, CssBaseline, Paper, SelectChangeEvent, Skeleton, styled, Typography } from "@mui/material";
 import { NextPage } from "next";
-import Head from "next/head";
-import React from "react";
-import Employee from "@/src/components/dashboard/Employee";
-import Bargraph from "@/src/components/charts/bargraph";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import Data from "../data/chart_data.json";
-import Piechart from "@/src/components/charts/piechart";
-import { relative } from "path";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import React, { memo, Suspense } from "react";
+import PieSkeleton from "@/src/components/loader/PieSkeleton";
+
+const Bargraph = dynamic(() => import("@/src/components/charts/bargraph"));
+const Sidebar = dynamic(() => import("@/src/layout/Sidebar"));
+const Piechart = dynamic(() => import("@/src/components/charts/piechart"));
+const BarSkeleton = dynamic(() => import("@/src/components/loader/BarSkeleton"));
 
 const DashboardPage: NextPage = () => {
     const [open, setOpen] = React.useState(true);
@@ -96,7 +97,7 @@ const DashboardPage: NextPage = () => {
                 }}
             >
                 <CssBaseline />
-                <Sidebar isOpen={open} />
+                <Sidebar />
                 <Box sx={{ width: "100%" }}>
                     <Paper
                         sx={{
@@ -134,9 +135,15 @@ const DashboardPage: NextPage = () => {
                                 gap: 3,
                             }}
                         >
-                            <Bargraph title={"Test Graph"} data={data} options={options} />
-                            <Piechart title={"Test Graph"} data={data} options={options} />
-                            <Bargraph title={"Test Graph"} data={data} options={options} />
+                            <Suspense fallback={<BarSkeleton />}>
+                                <Bargraph title={"Number of Employee by Status"} data={data} options={options} />
+                            </Suspense>
+                            <Suspense fallback={<PieSkeleton />}>
+                                <Piechart title={"Number of Employee by Gender"} data={data} options={options} />
+                            </Suspense>
+                            <Suspense fallback={<PieSkeleton />}>
+                                <Piechart title={"Number of Employee by Age Group"} data={data} options={options} />
+                            </Suspense>
                         </Box>
                     </Paper>
                 </Box>
@@ -145,4 +152,4 @@ const DashboardPage: NextPage = () => {
     );
 };
 
-export default DashboardPage;
+export default memo(DashboardPage);

@@ -4,8 +4,7 @@ import CustomTable from "@/src/components/form_modals/Tables";
 import CustomTabs from "@/src/components/form_modals/CustomTabs";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Head from "next/head";
-import MainNavbar from "@/src/layout/MainNavbar";
-import React from "react";
+import React, { memo } from "react";
 import Sidebar from "@/src/layout/Sidebar";
 import {
     Box,
@@ -24,88 +23,23 @@ import {
 } from "@mui/material";
 import DTRForm from "@/src/components/form_modals/DTRForm";
 import Employee from "@/src/components/dashboard/Employee";
-import FormComponent from "@/src/components/form_modals/FormComponent";
+import OTForm from "@/src/components/form_modals/OTForm";
 import LeaveForm from "@/src/components/form_modals/LeaveForm";
 import moment from "moment";
+import { connection } from "@/src/environment/connection";
 
 const EmployeePage: NextPage = (): JSX.Element => {
-    const [open, setOpen] = React.useState(true);
     const [tabName, setTabName] = React.useState<EnumTabs>(EnumTabs.TAB_ONE);
     const [openModal, setOpenModal] = React.useState(false);
-    const [OtNumber, setOtNumber] = React.useState("");
-    const handleChange = (event: SelectChangeEvent) => {
-        setOtNumber(event.target.value);
-    };
-
-    const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
-        open?: boolean;
-    }>(({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create(["margin", "width"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        ...(open && {
-            width: !open ? "100%" : "82%",
-            marginLeft: "18%",
-            position: "relative",
-            transition: theme.transitions.create(["margin", "width"], {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-        }),
-    }));
-
-    // const data = {
-    //     datasets: [
-    //         {
-    //             data: Data[0].data,
-    //             backgroundColor: ["#EAF6ED", "#67C587"],
-    //             borderColor: ["#EAF6ED", "#67C587"],
-    //             borderWidth: 1,
-    //         },
-    //     ],
-    //     labels: Data[0].labels,
-    // };
-
-    // const options = {
-    //     maintainAspectRatio: false,
-    //     plugins: {
-    //         datalabels: {
-    //             display: true,
-    //             anchor: "end",
-    //             align: "start",
-    //             offset: -30,
-    //         },
-    //         legend: {
-    //             display: true,
-    //             position: "bottom",
-    //         },
-    //     },
-
-    //     scales: {
-    //         y: {
-    //             ticks: {
-    //                 display: false,
-    //                 beginAtZero: true,
-    //             },
-
-    //             grid: {
-    //                 drawBorder: false,
-    //                 display: false,
-    //             },
-    //         },
-    //     },
-    // };
+    const [user, setUser] = React.useState(null);
 
     const test_data_tab_one: any[] = [
         {
             number: 87362813,
             year: moment().format("YYYY"),
             date: "REGULAR WORKS",
-            in: moment().format("LT"),
-            out: moment().format("LT"),
+            in: "12:00 PM",
+            out: "12:00 PM",
         },
     ];
 
@@ -119,6 +53,15 @@ const EmployeePage: NextPage = (): JSX.Element => {
             remarks: "-",
         },
     ];
+
+    const getUser = async () => {
+        const response = await connection.get("user/" + window.localStorage.getItem("user_id"));
+        setUser(response.data.data);
+    };
+
+    React.useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <Box>
@@ -144,22 +87,8 @@ const EmployeePage: NextPage = (): JSX.Element => {
                         open={openModal}
                         onClose={() => null}
                     >
-                        <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
-                            <DTRForm />
-                            <Paper elevation={0} sx={{ padding: "0 1rem", backgroundColor: "transparent" }}>
-                                <Stack direction="row-reverse" gap={2} my={2}>
-                                    <Button
-                                        onClick={() => setOpenModal((open) => !open)}
-                                        color="error"
-                                        variant="contained"
-                                    >
-                                        Close
-                                    </Button>
-                                    <Button color="success" variant="contained">
-                                        Save
-                                    </Button>
-                                </Stack>
-                            </Paper>
+                        <Box sx={{ backgroundColor: "#5B848D", width: "fit-content" }}>
+                            <DTRForm onCloseModal={(status) => setOpenModal(status)} />
                         </Box>
                     </Modal>
                 )}
@@ -169,22 +98,8 @@ const EmployeePage: NextPage = (): JSX.Element => {
                         open={openModal}
                         onClose={() => null}
                     >
-                        <Box sx={{ backgroundColor: "#044453", padding: "10px", width: "fit-content" }}>
-                            <FormComponent />
-                            <Paper elevation={0} sx={{ padding: "0 1rem", backgroundColor: "transparent" }}>
-                                <Stack direction="row-reverse" gap={2} my={2}>
-                                    <Button
-                                        onClick={() => setOpenModal((open) => !open)}
-                                        color="error"
-                                        variant="contained"
-                                    >
-                                        Close
-                                    </Button>
-                                    <Button color="success" variant="contained">
-                                        Save
-                                    </Button>
-                                </Stack>
-                            </Paper>
+                        <Box sx={{ backgroundColor: "#5B848D", width: "fit-content" }}>
+                            <OTForm onCloseModal={(status) => setOpenModal(status)} />
                         </Box>
                     </Modal>
                 )}
@@ -213,7 +128,7 @@ const EmployeePage: NextPage = (): JSX.Element => {
                         </Box>
                     </Modal>
                 )}
-                <Sidebar isOpen={open} />
+                <Sidebar />
                 <Box sx={{ width: "100%" }}>
                     <Paper
                         sx={{
@@ -243,7 +158,7 @@ const EmployeePage: NextPage = (): JSX.Element => {
                             marginBottom: 2.5,
                         }}
                     >
-                        <Employee />
+                        <Employee data={user} />
                     </Paper>
                     <Paper
                         elevation={3}
@@ -270,26 +185,23 @@ const EmployeePage: NextPage = (): JSX.Element => {
                                 </Button>
                                 <CustomTable label={["Edit", "Delete", "Number", "Year", "Date", "In", "Out"]}>
                                     {test_data_tab_one.map((value, index) => (
-                                        <TableRow
-                                            key={index}
-                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row" align="center">
-                                                <Button variant="contained" color="success" size="small">
+                                        <TableRow key={index}>
+                                            <TableCell>
+                                                <Button variant="contained" color="success" size="small" fullWidth>
                                                     Edit
                                                 </Button>
                                             </TableCell>
-                                            <TableCell align="center">
-                                                <Button variant="contained" color="error" size="small">
+                                            <TableCell>
+                                                <Button variant="contained" color="error" size="small" fullWidth>
                                                     Delete
                                                 </Button>
                                             </TableCell>
 
-                                            <TableCell align="center">{value.number}</TableCell>
-                                            <TableCell align="center">{value.year}</TableCell>
-                                            <TableCell align="center">{value.date}</TableCell>
-                                            <TableCell align="center">{value.in}</TableCell>
-                                            <TableCell align="center">{value.out}</TableCell>
+                                            <TableCell>{value.number}</TableCell>
+                                            <TableCell>{value.year}</TableCell>
+                                            <TableCell>{value.date}</TableCell>
+                                            <TableCell>{value.in}</TableCell>
+                                            <TableCell>{value.out}</TableCell>
                                         </TableRow>
                                     ))}
                                 </CustomTable>
@@ -309,6 +221,56 @@ const EmployeePage: NextPage = (): JSX.Element => {
                                     label={["Edit", "Delete", "Number", "Year", "Date", "Hours", "Approved", "Remarks"]}
                                 >
                                     {test_data_tab_two.map((value, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>
+                                                <Button variant="contained" color="success" size="small" fullWidth>
+                                                    Edit
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Button variant="contained" color="error" size="small" fullWidth>
+                                                    Delete
+                                                </Button>
+                                            </TableCell>
+
+                                            <TableCell>{value.number}</TableCell>
+                                            <TableCell>{value.year}</TableCell>
+                                            <TableCell>{value.date}</TableCell>
+                                            <TableCell>{value.hours}</TableCell>
+                                            <TableCell>
+                                                <Checkbox readOnly checked={true} />
+                                            </TableCell>
+                                            <TableCell align="center">{value.remarks}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </CustomTable>
+                            </Box>
+                        )}
+                        {tabName === EnumTabs.TAB_THREE && (
+                            <Box>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={() => setOpenModal((open) => !open)}
+                                    sx={{ float: "right", margin: "10px 0" }}
+                                >
+                                    Add
+                                </Button>
+                                <CustomTable
+                                    label={[
+                                        "Edit",
+                                        "Delete",
+                                        "Number",
+                                        "Year",
+                                        "Date",
+                                        "Leave Type",
+                                        "Half Day",
+                                        "With Pay",
+                                        "Approved",
+                                        "Remarks",
+                                    ]}
+                                >
+                                    {/* {test_data_tab_two.map((value, index) => (
                                         <TableRow
                                             key={index}
                                             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -333,114 +295,89 @@ const EmployeePage: NextPage = (): JSX.Element => {
                                             </TableCell>
                                             <TableCell align="center">{value.remarks}</TableCell>
                                         </TableRow>
-                                    ))}
+                                    ))} */}
+                                </CustomTable>
+                            </Box>
+                        )}
+                        {tabName === EnumTabs.TAB_FOUR && (
+                            <Box>
+                                <CustomTable label={["View", "Pay ID", "Date", "Year", "Remarks", "Approved By"]}>
+                                    {/* {test_data_tab_two.map((value, index) => (
+                                        <TableRow
+                                            key={index}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center">
+                                                <Button variant="contained" color="success" size="small">
+                                                    Edit
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Button variant="contained" color="error" size="small">
+                                                    Delete
+                                                </Button>
+                                            </TableCell>
+
+                                            <TableCell align="center">{value.number}</TableCell>
+                                            <TableCell align="center">{value.year}</TableCell>
+                                            <TableCell align="center">{value.date}</TableCell>
+                                            <TableCell align="center">{value.hours}</TableCell>
+                                            <TableCell align="center">
+                                                <Checkbox />
+                                            </TableCell>
+                                            <TableCell align="center">{value.remarks}</TableCell>
+                                        </TableRow>
+                                    ))} */}
+                                </CustomTable>
+                            </Box>
+                        )}
+                        {tabName === EnumTabs.TAB_FIVE && (
+                            <Box>
+                                <CustomTable
+                                    label={[
+                                        "View",
+                                        "DTR ID",
+                                        "Year",
+                                        "Date Start",
+                                        "Date Ended",
+                                        "Remarks",
+                                        "Approve By",
+                                    ]}
+                                >
+                                    {/* {test_data_tab_two.map((value, index) => (
+                                        <TableRow
+                                            key={index}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center">
+                                                <Button variant="contained" color="success" size="small">
+                                                    Edit
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Button variant="contained" color="error" size="small">
+                                                    Delete
+                                                </Button>
+                                            </TableCell>
+
+                                            <TableCell align="center">{value.number}</TableCell>
+                                            <TableCell align="center">{value.year}</TableCell>
+                                            <TableCell align="center">{value.date}</TableCell>
+                                            <TableCell align="center">{value.hours}</TableCell>
+                                            <TableCell align="center">
+                                                <Checkbox />
+                                            </TableCell>
+                                            <TableCell align="center">{value.remarks}</TableCell>
+                                        </TableRow>
+                                    ))} */}
                                 </CustomTable>
                             </Box>
                         )}
                     </Paper>
                 </Box>
-                {/* <Main open={open}>
-                    <Paper
-                        elevation={3}
-                        sx={{
-                            backgroundColor: "#044453",
-                            padding: "15px 0 15px 15px",
-                            width: "100%",
-                            marginBottom: 2.5,
-                        }}
-                    >
-                        <Employee />
-                    </Paper>
-                    <Paper
-                        elevation={3}
-                        sx={{ backgroundColor: "#044453", padding: "10px 18px 10px 15px", width: "100%" }}
-                    >
-                        <CustomTabs onTabChange={(tab) => setTabName(tab)} tabName={tabName} />
-                        <Divider sx={{ borderColor: "#ffffff" }} />
-                        {tabName === EnumTabs.TAB_ONE && (
-                            <Box>
-                                <Button
-                                    variant="contained"
-                                    color="success"
-                                    onClick={() => setOpenModal((open) => !open)}
-                                    sx={{ float: "right", margin: "10px 0" }}
-                                >
-                                    Add
-                                </Button>
-                                <CustomTable label={["Edit", "Delete", "Number", "Year", "Date", "In", "Out"]}>
-                                    {test_data_tab_one.map((value, index) => (
-                                        <TableRow
-                                            key={index}
-                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row" align="center">
-                                                <Button variant="contained" color="success" size="small">
-                                                    Edit
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <Button variant="contained" color="error" size="small">
-                                                    Delete
-                                                </Button>
-                                            </TableCell>
-
-                                            <TableCell align="center">{value.number}</TableCell>
-                                            <TableCell align="center">{value.year}</TableCell>
-                                            <TableCell align="center">{value.date}</TableCell>
-                                            <TableCell align="center">{value.in}</TableCell>
-                                            <TableCell align="center">{value.out}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </CustomTable>
-                            </Box>
-                        )}
-                        {tabName === EnumTabs.TAB_TWO && (
-                            <Box>
-                                <Button
-                                    variant="contained"
-                                    color="success"
-                                    onClick={() => setOpenModal((open) => !open)}
-                                    sx={{ float: "right", margin: "10px 0" }}
-                                >
-                                    Add
-                                </Button>
-                                <CustomTable
-                                    label={["Edit", "Delete", "Number", "Year", "Date", "Hours", "Approved", "Remarks"]}
-                                >
-                                    {test_data_tab_two.map((value, index) => (
-                                        <TableRow
-                                            key={index}
-                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row" align="center">
-                                                <Button variant="contained" color="success" size="small">
-                                                    Edit
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <Button variant="contained" color="error" size="small">
-                                                    Delete
-                                                </Button>
-                                            </TableCell>
-
-                                            <TableCell align="center">{value.number}</TableCell>
-                                            <TableCell align="center">{value.year}</TableCell>
-                                            <TableCell align="center">{value.date}</TableCell>
-                                            <TableCell align="center">{value.hours}</TableCell>
-                                            <TableCell align="center">
-                                                <Checkbox />
-                                            </TableCell>
-                                            <TableCell align="center">{value.remarks}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </CustomTable>
-                            </Box>
-                        )}
-                    </Paper>
-                </Main> */}
             </Box>
         </Box>
     );
 };
 
-export default EmployeePage;
+export default memo(EmployeePage);

@@ -17,7 +17,7 @@ const CustomTabs: React.FC<{ onTabChange: (tabs: EnumTabs) => void; tabName: Enu
         <Tabs
             TabIndicatorProps={{ style: { backgroundColor: "#ffffff" } }}
             value={tabName}
-            onChange={(event, tab) => onTabChange(tab)}
+            onChange={(event: any, tab: EnumTabs) => onTabChange(tab)}
             variant="fullWidth"
         >
             <Tab value={EnumTabs.TAB_ONE} label={EnumTabs.TAB_ONE} sx={{ color: "#ffffff" }} />

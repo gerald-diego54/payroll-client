@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Box, Button, Paper, Stack } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
@@ -8,16 +8,11 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import DatePicker from "@/src/ui/DatePicker";
-import TimePicker from "@/src/ui/TimePicker";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DTRSchema } from "@/src/schema/DTRSchema";
-import moment from "moment";
 
-const DTRForm: React.FC<{ onCloseModal: (status: boolean) => void }> = ({ onCloseModal }) => {
+const OTForm: React.FC<{ onCloseModal: (status: boolean) => void }> = ({ onCloseModal }) => {
     const [OtNumber, setOtNumber] = React.useState("");
     const [LeaveNumber, setLeaveNumber] = React.useState("");
-    const [openModal, setOpenModal] = React.useState(false);
     const handleChange = (event: SelectChangeEvent) => {
         setOtNumber(event.target.value);
         setLeaveNumber(event.target.value);
@@ -31,10 +26,10 @@ const DTRForm: React.FC<{ onCloseModal: (status: boolean) => void }> = ({ onClos
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: zodResolver(DTRSchema) });
+    } = useForm();
 
     return (
-        <form>
+        <form action="">
             <Paper
                 elevation={0}
                 sx={{
@@ -47,16 +42,14 @@ const DTRForm: React.FC<{ onCloseModal: (status: boolean) => void }> = ({ onClos
                 }}
             >
                 <Typography variant="h4" sx={{ marginBottom: "2rem" }}>
-                    DTR Application
+                    Overtime Application
                 </Typography>
                 <Divider sx={{ marginBottom: "2rem", borderColor: "#fff" }} />
-                <Box sx={{ gap: "2rem", display: "flex", width: "100%" }}>
+                <Box sx={{ gap: "2rem", display: "flex" }}>
                     <DatePicker register={register} name="date" />
-                </Box>
-
-                <Box sx={{ display: "flex", marginTop: "1rem", gap: 3 }}>
-                    <TimePicker label="Time In" time={moment()} />
-                    <TimePicker label="Time Out" />
+                    <FormControl variant="filled" sx={{ backgroundColor: "#fff" }}>
+                        <TextField type="number" variant="filled" label="Hours" />
+                    </FormControl>
                 </Box>
                 <Box sx={{ display: "flex", marginTop: "1rem", marginBottom: "1rem" }}>
                     <FormControl sx={{ minWidth: "100%", backgroundColor: "#fff" }}>
@@ -88,4 +81,4 @@ const DTRForm: React.FC<{ onCloseModal: (status: boolean) => void }> = ({ onClos
     );
 };
 
-export default DTRForm;
+export default memo(OTForm);

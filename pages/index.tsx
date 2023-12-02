@@ -3,10 +3,12 @@ import { Inter } from "next/font/google";
 import { Box } from "@mui/material";
 import Navbar from "@/src/layout/Navbar";
 import LoginForm from "@/src/components/login/LoginForm";
+import { NextPage } from "next";
+import { memo } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+const HomePage: NextPage = (): JSX.Element => {
     return (
         <Box>
             <Head>
@@ -21,4 +23,6 @@ export default function Home() {
             </Box>
         </Box>
     );
-}
+};
+
+export default memo(HomePage);
