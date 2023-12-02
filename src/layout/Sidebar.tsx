@@ -5,28 +5,12 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
 
-const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }): JSX.Element => {
-    const theme = useTheme();
-    const [nestedOpen, setNestedOpen] = React.useState(true);
-    const handleNestedClick = () => setNestedOpen(!nestedOpen);
-
-    const SidebarContainer = styled("div")({
-        display: "flex",
-        flexDirection: "column",
-        paddingRight: "10%",
-        height: "100%",
-        overflow: "hidden",
-    });
-
+const Sidebar: React.FC = (): JSX.Element => {
     return (
         <Box sx={{ width: "25%", backgroundColor: "#044453" }}>
-            <Image
-                src="/light-logo.svg"
-                width={206}
-                height={100}
-                alt="Picture of the author"
-                style={{ marginTop: "15%", marginBottom: "20%", marginLeft: "15%" }}
-            />
+            <Box sx={{ width: "fit-content", margin: "15% auto" }}>
+                <Image src="/light-logo.svg" priority width={206} height={100} alt="Picture of the author" />
+            </Box>
             <List
                 sx={{ width: "80%", backgroundColor: "#044453", margin: "0 auto" }}
                 component="nav"

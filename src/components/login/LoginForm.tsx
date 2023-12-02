@@ -8,30 +8,23 @@ import {
     Typography,
     useMediaQuery,
 } from "@mui/material";
+import { LoginSchema } from "@/src/schema/LoginSchema";
+import { Paper, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { useTheme } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@mui/material/Button";
 import Image from "next/image";
-import { Paper, TextField } from "@mui/material";
 import LogoDark from "../../../public/logo-dark.svg";
-import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
-import { useForm } from "react-hook-form";
-import axios, { AxiosResponse } from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/src/schema/LoginSchema";
-import { useRouter } from "next/router";
+import React, { memo, useState } from "react";
+import { connection } from "@/src/environment/connection";
 
 const LoginForm: React.FC = (): JSX.Element => {
-    const axiosInstance = axios.create({
-        baseURL: "http://localhost:8000/api",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
     const route = useRouter();
     const theme = useTheme();
     const [showPassword, setShowPassword] = useState(false);
-    const [apiData, setApiData] = useState<AxiosResponse<any, any>>();
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const media = useMediaQuery(theme.breakpoints.down("md"));
     const mobileStyle = { maxWidth: "90vw", margin: "40px auto 0 auto", padding: "30px 0" };
@@ -45,9 +38,8 @@ const LoginForm: React.FC = (): JSX.Element => {
         formState: { errors },
     } = useForm({ resolver: zodResolver(LoginSchema) });
     const onSubmit = async (data: any) => {
-        const res = await axiosInstance.post("/login", data);
+        const res = await connection.post("/login", data);
         if (res.status === 200) {
-            console.log(res);
             localStorage.setItem("email", res.data.data.email);
             localStorage.setItem("user_id", res.data.data.user_id);
             localStorage.setItem("token", res.data.token);
@@ -58,7 +50,7 @@ const LoginForm: React.FC = (): JSX.Element => {
 
     React.useEffect(() => {
         console.log(errors);
-    }, [errors, apiData]);
+    }, [errors]);
 
     return (
         <Paper elevation={3} sx={media ? mobileStyle : desktopStyle}>
@@ -108,4 +100,4 @@ const LoginForm: React.FC = (): JSX.Element => {
     );
 };
 
-export default LoginForm;
+export default memo(LoginForm);
