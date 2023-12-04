@@ -17,6 +17,7 @@
         "@mui/material": "^5.14.16",
         "@mui/styled-engine-sc": "^6.0.0-alpha.1",
         "@mui/x-date-pickers": "^6.17.0",
+        "@next/swc-win32-x64-msvc": "^14.0.3",
         "axios": "^1.6.2",
         "chart.js": "^4.4.0",
         "chartjs-plugin-datalabels": "^2.2.0",
