@@ -27,11 +27,15 @@ import OTForm from "@/src/components/form_modals/OTForm";
 import LeaveForm from "@/src/components/form_modals/LeaveForm";
 import moment from "moment";
 import { connection } from "@/src/environment/connection";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
 const EmployeePage: NextPage = (): JSX.Element => {
     const [tabName, setTabName] = React.useState<EnumTabs>(EnumTabs.TAB_ONE);
+    const [openModalPDF, setModalPDF] = React.useState(false);
     const [openModal, setOpenModal] = React.useState(false);
     const [user, setUser] = React.useState(null);
+    const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
     const test_data_tab_one: any[] = [
         {
@@ -59,6 +63,10 @@ const EmployeePage: NextPage = (): JSX.Element => {
         setUser(response.data.data);
     };
 
+    const onOpenPayrollModal = () => {
+        setModalPDF((openModalPDF) => !openModalPDF);
+    };
+
     React.useEffect(() => {
         getUser();
     }, []);
@@ -81,6 +89,49 @@ const EmployeePage: NextPage = (): JSX.Element => {
                 }}
             >
                 <CssBaseline />
+                <Modal
+                    sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
+                    open={openModalPDF}
+                    onClose={() => null}
+                >
+                    <Box sx={{ backgroundColor: "#5B848D" }}>
+                        <Box sx={{ padding: 4 }}>
+                            <Paper sx={{ backgroundColor: "#5B848D" }} elevation={0}>
+                                <Typography variant="h4" sx={{ marginBottom: "1rem", color: "#ffffff" }}>
+                                    Payroll
+                                </Typography>
+                                <Divider sx={{ marginBottom: "1rem", borderColor: "#fff" }} />
+                                <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.js">
+                                    <div style={{ height: "500px", width: "600px", backgroundColor: "#5B848D" }}>
+                                        <Viewer fileUrl="/test.pdf" plugins={[defaultLayoutPluginInstance]} />
+                                    </div>
+                                </Worker>
+                            </Paper>
+                            <Divider sx={{ borderColor: "#fff", mt: 2 }} />
+                        </Box>
+
+                        <Paper elevation={0} sx={{ backgroundColor: "transparent" }}>
+                            <Stack direction="row-reverse" my={2}>
+                                <Button
+                                    onClick={onOpenPayrollModal}
+                                    color="error"
+                                    variant="contained"
+                                    sx={{ width: "100%", height: 60, borderRadius: 0 }}
+                                >
+                                    Close
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ width: "100%", height: 60, borderRadius: 0, backgroundColor: "#044453" }}
+                                    disabled
+                                >
+                                    Save
+                                </Button>
+                            </Stack>
+                        </Paper>
+                    </Box>
+                </Modal>
                 {EnumTabs.TAB_ONE === tabName && (
                     <Modal
                         sx={{ margin: "auto", width: "fit-content", height: "fit-content" }}
@@ -328,6 +379,24 @@ const EmployeePage: NextPage = (): JSX.Element => {
                                             <TableCell align="center">{value.remarks}</TableCell>
                                         </TableRow>
                                     ))} */}
+                                    <TableRow>
+                                        <TableCell>
+                                            <Button
+                                                onClick={onOpenPayrollModal}
+                                                variant="contained"
+                                                color="success"
+                                                size="small"
+                                                fullWidth
+                                            >
+                                                View
+                                            </Button>
+                                        </TableCell>
+                                        <TableCell>19-10384-616</TableCell>
+                                        <TableCell>{moment().format("L")}</TableCell>
+                                        <TableCell>{moment().format("YYYY")}</TableCell>
+                                        <TableCell>--</TableCell>
+                                        <TableCell>Admin</TableCell>
+                                    </TableRow>
                                 </CustomTable>
                             </Box>
                         )}
