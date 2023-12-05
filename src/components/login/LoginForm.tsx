@@ -29,9 +29,7 @@ const LoginForm: React.FC = (): JSX.Element => {
     const media = useMediaQuery(theme.breakpoints.down("md"));
     const mobileStyle = { maxWidth: "90vw", margin: "40px auto 0 auto", padding: "30px 0" };
     const desktopStyle = { maxWidth: "332px", margin: "40px auto 0 auto", padding: "30px 0" };
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault();
     const {
         register,
         handleSubmit,
@@ -47,10 +45,6 @@ const LoginForm: React.FC = (): JSX.Element => {
             route.push("/dashboard");
         }
     };
-
-    React.useEffect(() => {
-        console.log(errors);
-    }, [errors]);
 
     return (
         <Paper elevation={3} sx={media ? mobileStyle : desktopStyle}>
